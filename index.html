@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      background-color:#F9F6EE;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .heading {
+      text-align: center;
+    }
+
+    .sub-heading {
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 2px;
+    }
+
+    .card h3 {
+      margin-top: 0px;
+    }
+
+    .card p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="heading" id="restaurantName"></h1>
+    <h2 class="sub-heading">CHOOSE WORKERS TO DONATE</h2>
+    <div class="grid" id="workersGrid"></div>
+  </div>
+
+  <script>
+    async function getWorkers(userId) {
+      try {
+        const response = await fetch(`/api/workers/${userId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch workers');
+        }
+        const workers = await response.json();
+        return workers;
+      } catch (error) {
+        console.error('Error fetching workers:', error);
+        return [];
+      }
+    }
+
+    async function displayWorkers() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+
+      if (!userId) {
+        console.error('User ID not found');
+        return;
+      }
+
+      // Fetch user details and update the restaurant name
+      try {
+        const userResponse = await fetch(`/api/users/${userId}`);
+        if (!userResponse.ok) {
+          throw new Error('Failed to fetch user');
+        }
+        const user = await userResponse.json();
+        const restaurantNameElement = document.getElementById('restaurantName');
+        restaurantNameElement.textContent = user.name;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+
+      const workersGrid = document.getElementById('workersGrid');
+      workersGrid.innerHTML = ''; // Clear existing content
+
+      try {
+        const workers = await getWorkers(userId);
+        workers.forEach(worker => {
+          const card = document.createElement('div');
+          card.classList.add('card');
+          card.onclick = () => showPaymentForm(worker.name, worker._id);
+
+          const img = document.createElement('img');
+          img.src = 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250'; // Replace with actual worker image URL
+          img.alt = `Worker ${worker.name}`;
+          worker.profession = "waiter"
+          worker.name = "Deven Khobragade"
+
+          const name = document.createElement('p');
+          name.textContent = worker.name;
+
+          const role = document.createElement('p');
+          role.textContent = worker.profession; // Assuming worker role is available as 'profession'
+
+          card.appendChild(img);
+          card.appendChild(name);
+          card.appendChild(role);
+
+          workersGrid.appendChild(card);
+        });
+      } catch (error) {
+        console.error('Error displaying workers:', error);
+      }
+    }
+
+    function showPaymentForm(workerName, workerId) {
+      window.location.href = `payment.html?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}`;
+    }
+
+    // Call the function to display workers when the page loads
+    displayWorkers();
+  </script>
+</body>
+</html>

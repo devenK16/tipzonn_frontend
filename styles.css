@@ -1,0 +1,37 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Change as needed */
+}
+
+.container {
+    text-align: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    font-size: 48px;
+    color: white;
+}
+
+.green {
+    background-color: #4CAF50; /* Green */
+}
+
+.red {
+    background-color: #f44336; /* Red */
+}
+
+.status {
+    font-size: 24px;
+    font-weight: bold;
+}

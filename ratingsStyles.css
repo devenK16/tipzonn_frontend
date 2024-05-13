@@ -1,0 +1,50 @@
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('fonts/Poppins-Regular.ttf') format('truetype'); /* Adjust the path and filename as per your file structure */
+  /* Include additional font weights and styles here if needed */
+}
+
+/* General styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Use Poppins font as the default font for the entire document */
+}
+
+#rating-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#rating-container img {
+  display: block;
+  margin: 0 auto;
+}
+
+#rating-container p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.emoji-ratings {
+  display: flex;
+  justify-content: space-around;
+}
+
+.emoji-ratings div {
+  text-align: center;
+}
+
+.emoji {
+  font-size: 2rem;
+}
+
+.rating-text {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  margin-bottom: 120px;
+}
+
+.feedback-message {
+  font-size: 14px !important; 
+}

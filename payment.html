@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f3f4f6;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+    }
+    .header {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px; /* Adjusted margin */
+    }
+    .input-container {
+        width: 100%;
+        text-align: center;
+    }
+    .payment-input {
+        font-size: 40px;
+        width: auto; /* Changed width to auto */
+        padding: 10px;
+        margin-top: 40px;
+        text-align: center;
+        border: none; /* Removed border */
+        outline: none; /* Removed outline */
+        background-color: #f3f4f6;
+        /* border-bottom: 1px solid #000000; */
+    }
+    .payment-btn {
+        font-size: 20px;
+        width: 80%;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 100px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>Enter payment amount</h2>
+        <!-- Added "₹" symbol as a text node -->
+        <input type="number" id="paymentAmount" class="payment-input" value="" placeholder="₹ 0">
+    </div>
+    <button class="payment-btn" onclick="processPayment()">Pay</button>
+</div>
+
+<script>
+
+    function processPayment() {
+        var amount = document.getElementById('paymentAmount').value;
+        // Add your payment processing logic here, such as calling a payment API
+        console.log('Processing payment of ₹' + amount);
+        // You can redirect user to payment gateway or perform any other action here
+        // For demonstration, let's just go back to the previous page
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>

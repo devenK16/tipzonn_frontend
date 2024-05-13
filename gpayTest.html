@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open UPI App</title>
+</head>
+<body>
+
+<button id="upiPaymentButton">Buy Now</button>
+
+<script>
+document.getElementById("upiPaymentButton").addEventListener("click", function() {
+    var upiUrl = "upi://pay?pa=paytmqr1l7rajzwvs@paytm&pn=Paytm&mc=0000&mode=02&purpose=00";
+
+    // Create a temporary anchor element
+    var anchor = document.createElement('a');
+    anchor.href = upiUrl;
+
+    // Trigger a click event on the anchor element
+    if (document.createEvent) {
+        var event = document.createEvent("MouseEvents");
+        event.initEvent("click", true, true);
+        anchor.dispatchEvent(event);
+    } else {
+        anchor.click();
+    }
+
+    // Listen for changes in the URL to detect when payment is completed
+    var checkPaymentInterval = setInterval(function() {
+        if (window.location.href !== upiUrl) {
+            clearInterval(checkPaymentInterval);
+            // Check if payment was successful
+            var paymentStatus = window.location.href.includes("success") ? "Successful" : "Failed";
+            alert("Payment " + paymentStatus);
+            // Redirect back to the original page
+            window.location.href = "original_page_url_here";
+        }
+    }, 1000);
+});
+</script>
+
+</body>
+</html>
