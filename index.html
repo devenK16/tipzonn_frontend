@@ -66,7 +66,7 @@
   <script>
     async function getWorkers(userId) {
       try {
-        const response = await fetch(`/api/workers/${userId}`);
+        const response = await fetch(`http://tipzonn-main.eba-hvbywyw6.ap-south-1.elasticbeanstalk.com/api/workers/6641f5e3f595e89289f791e5`);
         if (!response.ok) {
           throw new Error('Failed to fetch workers');
         }
@@ -89,7 +89,7 @@
 
       // Fetch user details and update the restaurant name
       try {
-        const userResponse = await fetch(`/api/users/${userId}`);
+        const userResponse = await fetch(`http://tipzonn-main.eba-hvbywyw6.ap-south-1.elasticbeanstalk.com/api/users/6641f5e3f595e89289f791e5`);
         if (!userResponse.ok) {
           throw new Error('Failed to fetch user');
         }
