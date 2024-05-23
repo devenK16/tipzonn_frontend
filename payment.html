@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Payment Form</title>
+<title>Tipzonn - Payment</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -12,25 +12,28 @@
         box-sizing: border-box;
         background-color: #f3f4f6;
         height: 100vh;
-    }
-    .container {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-height: 100%;
+        overflow: hidden; /* Prevent vertical scrolling */
+    }
+    .container {
+        text-align: center;
+        width: 300px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
     }
     .header {
-        text-align: center;
         font-size: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .input-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin: 10px 0;
     }
     .rupee-symbol {
         font-size: 40px;
@@ -43,16 +46,44 @@
         outline: none;
         background-color: #f3f4f6;
     }
-    .payment-btn {
+    .tip-buttons {
+        display: flex;
+        justify-content: space-around;
+        margin: 10px 0;
+    }
+    .tip-button {
         font-size: 20px;
-        width: 80%;
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-top: 20px;
+    }
+    .keypad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .keypad button {
+        font-size: 20px;
+        padding: 15px;
+        background-color: #e0e0e0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .payment-btn {
+        font-size: 20px;
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
     }
 </style>
 </head>
@@ -60,16 +91,55 @@
 
 <div class="container">
     <div class="header">
-        <h2>Enter payment amount</h2>
+        <h2>Tipping <span id="workerName"></span></h2>
     </div>
     <div class="input-container">
         <span class="rupee-symbol">₹</span>
         <input type="number" id="paymentAmount" class="payment-input" value="100" placeholder="100">
     </div>
+    <div class="tip-buttons">
+        <button class="tip-button" onclick="setTipAmount(50)">50</button>
+        <button class="tip-button" onclick="setTipAmount(100)">100</button>
+        <button class="tip-button" onclick="setTipAmount(150)">150</button>
+    </div>
+    <div class="keypad">
+        <button onclick="appendNumber(1)">1</button>
+        <button onclick="appendNumber(2)">2</button>
+        <button onclick="appendNumber(3)">3</button>
+        <button onclick="appendNumber(4)">4</button>
+        <button onclick="appendNumber(5)">5</button>
+        <button onclick="appendNumber(6)">6</button>
+        <button onclick="appendNumber(7)">7</button>
+        <button onclick="appendNumber(8)">8</button>
+        <button onclick="appendNumber(9)">9</button>
+        <button onclick="clearAmount()">C</button>
+        <button onclick="appendNumber(0)">0</button>
+        <button onclick="deleteLastDigit()">←</button>
+    </div>
     <button class="payment-btn" onclick="processPayment()">Pay</button>
 </div>
 
 <script>
+    function setTipAmount(amount) {
+        document.getElementById('paymentAmount').value = amount;
+    }
+
+    function appendNumber(number) {
+        let amount = document.getElementById('paymentAmount').value;
+        amount = amount === "0" ? number : amount + number;
+        document.getElementById('paymentAmount').value = amount;
+    }
+
+    function clearAmount() {
+        document.getElementById('paymentAmount').value = 0;
+    }
+
+    function deleteLastDigit() {
+        let amount = document.getElementById('paymentAmount').value;
+        amount = amount.slice(0, -1);
+        document.getElementById('paymentAmount').value = amount === "" ? 0 : amount;
+    }
+
     function processPayment() {
         var amount = document.getElementById('paymentAmount').value;
         // Add your payment processing logic here, such as calling a payment API
@@ -77,6 +147,20 @@
         // You can redirect user to payment gateway or perform any other action here
         // For demonstration, let's just go back to the previous page
         window.history.back();
+    }
+
+    // Function to get URL parameters
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Display worker's name from URL parameters
+    window.onload = function() {
+        const workerName = getQueryParam('worker');
+        if (workerName) {
+            document.getElementById('workerName').innerText = workerName;
+        }
     }
 </script>
 
