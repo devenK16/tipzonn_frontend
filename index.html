@@ -39,11 +39,15 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 5px;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .card img {
-      width: 200px; /* Set the desired width */
-      height: 200px; /* Set the desired height */
+      width: 140px; /* Set the desired width */
+      height: 140px; /* Set the desired height */
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 2px;
@@ -115,8 +119,6 @@
           const img = document.createElement('img');
           img.src = worker.photo; // Replace with actual worker image URL
           img.alt = `Worker ${worker.name}`;
-          worker.profession = "waiter"
-          worker.name = "Deven Khobragade"
 
           const name = document.createElement('p');
           name.textContent = worker.name;
