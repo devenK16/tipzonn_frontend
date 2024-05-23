@@ -29,6 +29,9 @@
         width: 100%;
         text-align: center;
     }
+    .rupee-symbol {
+        font-size: 40px;
+    }
     .payment-input {
         font-size: 40px;
         width: auto; /* Changed width to auto */
@@ -59,7 +62,9 @@
     <div class="header">
         <h2>Enter payment amount</h2>
         <!-- Added "₹" symbol as a text node -->
-        <input type="number" id="paymentAmount" class="payment-input" value="" placeholder="₹ 0">
+    
+        <span class="rupee-symbol">₹</span>
+        <input type="number" id="paymentAmount" class="payment-input" value="100" placeholder="100">
     </div>
     <button class="payment-btn" onclick="processPayment()">Pay</button>
 </div>
