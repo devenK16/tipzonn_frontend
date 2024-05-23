@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donation</title>
+  <title>Tipzonn</title>
   <style>
      body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      height: 100vh; /* Add this line */
     }
 
     .container {
       background-color:#F9F6EE;
-      max-width: 800px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 20px;
+      min-height: 100%; /* Add this line */
     }
 
     .heading {
@@ -24,7 +26,8 @@
     }
 
     .sub-heading {
-      text-align: center;
+      text-align: start;
+      padding-left: 10px;
     }
 
     .grid {
@@ -65,7 +68,7 @@
 <body>
   <div class="container">
     <h1 class="heading" id="restaurantName"></h1>
-    <h2 class="sub-heading">CHOOSE WORKERS TO DONATE</h2>
+    <h2 class="sub-heading">Select Worker</h2>
     <div class="grid" id="workersGrid"></div>
   </div>
 
