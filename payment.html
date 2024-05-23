@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Payment Form</title>
 <style>
     body {
@@ -11,38 +11,39 @@
         padding: 0;
         box-sizing: border-box;
         background-color: #f3f4f6;
-        height: 100vh; /* Add this line */
+        height: 100vh;
     }
     .container {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;        
-        min-height: 100%; /* Add this line */
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
     }
     .header {
         text-align: center;
         font-size: 20px;
         margin-top: 20px;
-        margin-bottom: 20px; /* Adjusted margin */
+        margin-bottom: 20px;
     }
     .input-container {
-        width: 100%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
     }
     .rupee-symbol {
         font-size: 40px;
+        margin-right: 10px; /* Add some space between symbol and input */
     }
     .payment-input {
         font-size: 40px;
-        width: auto; /* Changed width to auto */
+        width: 150px;
         padding: 10px;
-        margin-top: 40px;
         text-align: center;
-        border: none; /* Removed border */
-        outline: none; /* Removed outline */
+        border: none;
+        outline: none;
         background-color: #f3f4f6;
-        /* border-bottom: 1px solid #000000; */
     }
     .payment-btn {
         font-size: 20px;
@@ -53,7 +54,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-bottom: 100px;
+        margin-top: 20px;
     }
 </style>
 </head>
@@ -62,8 +63,8 @@
 <div class="container">
     <div class="header">
         <h2>Enter payment amount</h2>
-        <!-- Added "₹" symbol as a text node -->
-    
+    </div>
+    <div class="input-container">
         <span class="rupee-symbol">₹</span>
         <input type="number" id="paymentAmount" class="payment-input" value="100" placeholder="100">
     </div>
@@ -71,7 +72,6 @@
 </div>
 
 <script>
-
     function processPayment() {
         var amount = document.getElementById('paymentAmount').value;
         // Add your payment processing logic here, such as calling a payment API
