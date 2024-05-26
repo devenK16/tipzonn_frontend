@@ -151,7 +151,10 @@
         console.log('Processing payment of ₹' + amount);
         // You can redirect user to payment gateway or perform any other action here
         // For demonstration, let's just go back to the previous page
-        window.history.back();
+        const workerName = getQueryParam('worker');
+        const workerId = getQueryParam('workerId');
+        const userId = getQueryParam('tzId');
+        window.location.href = `ratingsTest.html?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}&tzId=${encodeURIComponent(userId)}`;
     }
 
     // Function to get URL parameters

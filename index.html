@@ -123,7 +123,7 @@
         workers.forEach(worker => {
           const card = document.createElement('div');
           card.classList.add('card');
-          card.onclick = () => showPaymentForm(worker.name, worker._id);
+          card.onclick = () => showPaymentForm(worker.name, worker._id , userId);
 
           const img = document.createElement('img');
           img.src = worker.photo; // Replace with actual worker image URL
@@ -146,8 +146,8 @@
       }
     }
 
-    function showPaymentForm(workerName, workerId) {
-      window.location.href = `payment.html?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}`;
+    function showPaymentForm(workerName, workerId , userId ) {
+      window.location.href = `payment.html?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}&tzId=${encodeURIComponent(userId)}`;
     }
 
     // Call the function to display workers when the page loads
