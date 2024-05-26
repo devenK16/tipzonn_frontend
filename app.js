@@ -60,7 +60,7 @@ async function fetchUserDetails() {
 
 async function getPlaceId(name, address, apiKey) {
   const input = `${name}, ${address}`;
-  const endpoint = `http://localhost:8000/api/place?input=${encodeURIComponent(input)}&key=${apiKey}`; // Ensure this matches your backend server URL
+  const endpoint = `https://backend-staging.tipzonn.com/api/place?input=${encodeURIComponent(input)}&key=${apiKey}`; // Ensure this matches your backend server URL
 
   try {
     const response = await fetch(endpoint);
