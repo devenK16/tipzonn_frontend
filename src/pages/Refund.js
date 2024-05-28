@@ -9,7 +9,7 @@ function Refunds(){
             <div className="logo">
             <h1>Tipzonn</h1> 
             </div>
-            <h1>Privacy Policy</h1>
+            <h1>Refunds/Cancellations</h1>
         </div>
         
       <div className="content">
