@@ -10,7 +10,7 @@ const WorkerGrid = ({ tzId }) => {
   useEffect(() => {
     const fetchWorkers = async () => {
       try {
-        const response = await fetch(`https://backend-staging.tipzonn.com/api/workers/${tzId}`);
+        const response = await fetch(`https://backend.tipzonn.com/api/workers/${tzId}`);
         const workersData = await response.json();
         setWorkers(workersData);
       } catch (error) {
@@ -20,7 +20,7 @@ const WorkerGrid = ({ tzId }) => {
 
     const fetchRestaurantName = async () => {
       try {
-        const response = await fetch(`https://backend-staging.tipzonn.com/api/users/${tzId}`);
+        const response = await fetch(`https://backend.tipzonn.com/api/users/${tzId}`);
         const user = await response.json();
         setRestaurantName(user.name);
       } catch (error) {

@@ -28,7 +28,7 @@ const PaymentForm = () => {
     };
 
     try {
-      const response = await fetch('https://backend-staging.tipzonn.com/api/payment/create-order', {
+      const response = await fetch('https://backend.tipzonn.com/api/payment/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
