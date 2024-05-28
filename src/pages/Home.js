@@ -29,8 +29,8 @@ const Home = () => {
       ) : (
         <>
           <Helmet>
-            <title>Squiggly Kindly Sparrow</title>
-            <meta property="og:title" content="Squiggly Kindly Sparrow" />
+            <title>Tizponn</title>
+            <meta property="og:title" content="Tizponn" />
           </Helmet>
           <div className="home-navbar1">
             <Navbar2 rootClassName="navbar2-root-class-name"></Navbar2>
