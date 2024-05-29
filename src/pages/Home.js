@@ -68,7 +68,7 @@ const Home = () => {
             <Navbar2 rootClassName="navbar2-root-class-name" onLinkClick={handleLinkClick}></Navbar2>
           </div>
           <div className="home-hero2">
-            <Hero12 heading1="India's Leading Tipping Platform"></Hero12>
+            <Hero12></Hero12>
           </div>
           <div className="home-features5" ref={featuresRef}>
             <Features171
