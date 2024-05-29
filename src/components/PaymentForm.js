@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './payment.css';  // Import the payment CSS
 
 // Ensure the Razorpay script is loaded
 const loadRazorpayScript = (src) => {
@@ -75,7 +76,7 @@ const PaymentForm = () => {
   }, [processPayment]);
 
   return (
-    <div className="container">
+    <div className="container-paymentForm">
       <div className="header-paymentForm">
         <h2>Tipping <span id="workerName">{workerName}</span></h2>
       </div>

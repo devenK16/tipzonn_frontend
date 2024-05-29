@@ -36,11 +36,11 @@
 }
 
 /* Base styles */
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-}
+} */
 
 .container {
   text-align: center;
@@ -77,79 +77,7 @@ body {
   border-radius: 50%;
 }
 
-.header-paymentForm{
-  font-size: 20px;
-  display: flex;
-  justify-content: center; 
-}
-.input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 60px;
-}
 
-.rupee-symbol {
-  font-size: 40px;
-  margin-right: 10px;
-}
-
-.payment-input {
-  font-size: 40px;
-  width: 100px;
-  padding: 5px;
-  text-align: center;
-  border: none;
-  outline: none;
-  background-color: #fff;
-}
-
-.tip-buttons {
-  display: flex;        
-  justify-content: space-around;
-  margin-bottom: 20px;
-  margin: 10px 0;
-  margin-bottom: 40px;
-}
-
-.tip-button {
-  width: 80px;
-  font-size: 18px;
-  padding: 10px 20px;
-  background-color: #5ce4e4;
-  color: #000000;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.keypad button {
-  padding: 10px;
-  font-size: 18px;
-  background-color: #FFFFFF;
-  border: 1px solid #FFFFFF;
-  cursor: pointer;
-}
-
-.payment-btn {
-  font-size: 20px;
-  width: 100%;
-  padding: 10px;
-  background-color: #5ce4e4;
-  color: #000000;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
 
 #rating-container {
   text-align: center;
