@@ -81,10 +81,10 @@ Contact4.defaultProps = {
   content3: 'Follow us on social media for updates and more.',
   content1:
     "We'd love to hear from you! Reach out to us for any questions or feedback.",
-  phone1: '+1 (555) 123-4567',
+  phone1: '+91 9322136520',
   content5: 'Stay in touch with Tipzonn for the latest news and features.',
   email1: 'info@tipzonn.com',
-  address1: '123 Main Street, Cityville, State, 12345',
+  address1: 'Laxmi Nagar, Sewagram road, Wardha, Maharashtra - 442001',
 }
 
 Contact4.propTypes = {
