@@ -101,7 +101,7 @@ const PaymentForm = () => {
           <button key={number} onClick={() => setAmount(amount + number.toString())}>{number}</button>
         ))}
         <button onClick={() => setAmount('0')}>C</button>
-        <button onClick={() => setAmount(amount.slice(0, -1))}>←</button>
+<button onClick={() => setAmount(String(amount).slice(0, -1))}>←</button>
       </div>
       <button className="payment-btn" id="rzp-button1">Pay</button>
     </div>
