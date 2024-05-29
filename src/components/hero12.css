@@ -3,6 +3,8 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding: 20px; /* Add some padding to the container */
+  width: 100%; /* Ensure the container takes up the full width */
 }
 .hero12-column {
   gap: 24px;
@@ -10,6 +12,9 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  flex: 1; /* Allow the column to take up available space */
+  gap: 24px;
+  max-width: 50%; /* Limit the max width to half the container */
 }
 .hero12-content {
   gap: 10px;
@@ -19,12 +24,13 @@
   flex-direction: column;
 }
 .hero12-container1 {
-  flex: 1;
   display: flex;
-  position: relative;
+  flex: 1; /* Allow the image container to take up available space */
   align-items: center;
+  justify-content: center;
+  position: relative;
   padding-top: 35%;
-  justify-content: flex-start;
+  max-width: 50%; /* Limit the max width to half the container */
 }
 .hero12-image1 {
   left: 0px;
@@ -34,6 +40,13 @@
   position: absolute;
   flex-grow: 1;
   object-fit: cover;
+}
+.thq-flex-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spread out the children */
+  width: 100%; /* Ensure the row takes up the full width */
+  gap: 20px; /* Add some space between the items */
 }
 @media(max-width: 991px) {
   .hero12-container1 {
@@ -50,5 +63,13 @@
   }
   .hero12-image1 {
     width: 100%;
+  }
+  .thq-flex-row {
+    flex-direction: column;
+  }
+
+  .hero12-column {
+    max-width: 100%; /* Remove the max-width limit */
+    align-items: center; /* Center align the content */
   }
 }

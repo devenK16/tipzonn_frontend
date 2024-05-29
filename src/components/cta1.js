@@ -6,7 +6,7 @@ import './cta1.css'
 
 const CTA1 = (props) => {
   return (
-    <div className="cta1-container thq-section-padding">
+    <div className="cta1-container thq-section-padding1">
       <div className="cta1-max-width thq-section-max-width">
         <div className="cta1-content">
           <h2 className="cta1-heading1 thq-heading-2">{props.heading1}</h2>

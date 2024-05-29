@@ -6,7 +6,7 @@ import './faq1.css'
 
 const FAQ1 = (props) => {
   return (
-    <div className="faq1-faq7 thq-section-padding">
+    <div className="faq1-faq7 thq-section-padding1">
       <div className="faq1-max-width thq-section-max-width">
         <div className="thq-flex-column">
           <h2 className="thq-heading-2">{props.heading1}</h2>

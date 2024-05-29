@@ -7,7 +7,7 @@ import './hero12.css'
 const Hero12 = (props) => {
   return (
       <div className="hero12-max-width thq-section-max-width">
-        <div className="thq-flex-row">
+        <div className="thq-flex-row1">
           <div className="hero12-column">
             <div className="hero12-content">
               <h1 className="thq-heading-1 hero12-heading1">

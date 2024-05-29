@@ -77,6 +77,10 @@
   display: flex;
   position: relative;
 }
+.thq-section-padding1 {
+  padding-right: 40px; /* Right padding */
+  padding-left: 40px;
+}
 @media(max-width: 991px) {
   .faq1-max-width {
     gap: var(--dl-space-space-oneandhalfunits);
@@ -88,5 +92,9 @@
   }
   .faq1-button {
     width: 100%;
+  }
+  .thq-section-padding1 {
+    padding-right: 20px; /* Right padding */
+    padding-left: 20px;
   }
 }

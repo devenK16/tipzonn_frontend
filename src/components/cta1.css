@@ -33,6 +33,10 @@
 .cta1-action1 {
   text-align: center;
 }
+.thq-section-padding1 {
+  padding-right: 40px; /* Right padding */
+  padding-left: 40px;
+}
 @media(max-width: 479px) {
   .cta1-actions {
     width: 100%;
@@ -40,5 +44,9 @@
   }
   .cta1-button {
     width: 100%;
+  }
+  .thq-section-padding1 {
+    padding-right: 20px; /* Right padding */
+    padding-left: 20px;
   }
 }
