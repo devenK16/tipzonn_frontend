@@ -1,5 +1,5 @@
 // Home.js
-import React from 'react';
+import React, { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import WorkerGrid from '../components/WorkerGrid'; // Assuming this is in your project
 import { Helmet } from 'react-helmet';
@@ -22,6 +22,38 @@ const Home = () => {
   const query = useQuery();
   const tzId = query.get('tzId');
 
+  const homeRef = useRef(null);
+  const featuresRef = useRef(null);
+  const ctaRef = useRef(null);
+  const contactRef = useRef(null);
+
+  const handleLinkClick = (link) => {
+    switch (link) {
+      case 'Home':
+        if (homeRef.current) {
+          homeRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+      case 'For Businesses':
+        if (featuresRef.current) {
+          featuresRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+      case 'How It Works':
+        if (ctaRef.current) {
+          ctaRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+      case 'Contact Us':
+        if (contactRef.current) {
+          contactRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="home-container">
       {tzId ? (
@@ -33,12 +65,12 @@ const Home = () => {
             <meta property="og:title" content="Tizponn" />
           </Helmet>
           <div className="home-navbar1">
-            <Navbar2 rootClassName="navbar2-root-class-name"></Navbar2>
+            <Navbar2 rootClassName="navbar2-root-class-name" onLinkClick={handleLinkClick}></Navbar2>
           </div>
           <div className="home-hero2">
             <Hero12 heading1="India's Leading Tipping Platform"></Hero12>
           </div>
-          <div className="home-features5">
+          <div className="home-features5" ref={featuresRef}>
             <Features171
               feature1Title="Simple for your customers"
               feature1Description="Your guests can send cashless tips directly to your staff members. Guests simply scan the QR code on your merchandise or receipt, select the recipient(s) they want to tip, leave a review and pay. There is no app required and the process takes just 3 seconds to complete."
@@ -56,7 +88,7 @@ const Home = () => {
               feature1Description="Whether you want to collect individual or common tips, Tipzonn  has you covered. You can be set up for any collection or distribution types and can take care of regulatory requirements no matter if your staff are self-employed, employed or a mix of both. Tipzonn's cashless tipping platform helps you build a consistent and transparent tipping system your staff will love."
             ></Features17>
           </div>
-          <div className="home-cta8">
+          <div className="home-cta8" ref={ctaRef}>
             <CTA1
               action1="Contact Us"
               content1="Tipzonn's innovative digital tipping platform supports hospitality and services business owners, staff and customers by providing a seamless cashless tipping experience. "
@@ -65,7 +97,7 @@ const Home = () => {
           <div className="home-faq9">
             <FAQ1 action1="Contact Us"></FAQ1>
           </div>
-          <div className="home-contact10">
+          <div className="home-contact10" ref={contactRef}>
             <Contact4
               email1="contact@tipzonn.com"
               content2="For any inquiries or support, please email us at the address below"

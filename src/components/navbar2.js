@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types'
 
 import './navbar2.css'
 
 const Navbar2 = (props) => {
+  const [activeLink, setActiveLink] = useState(props.link1); // Default to 'Home'
+
+  const handleLinkClick = (link , event) => {
+    event.preventDefault();
+    setActiveLink(link);
+    props.onLinkClick(link);
+  };
+  
   return (
     <div className={`navbar2-container ${props.rootClassName} `}>
       <header data-thq="thq-navbar" className="navbar2-navbar-interactive">
@@ -15,11 +23,41 @@ const Navbar2 = (props) => {
         />
         <div data-thq="thq-navbar-nav" className="navbar2-desktop-menu">
           <nav className="navbar2-links">
-            <span className="thq-link thq-body-small">{props.link1}</span>
-            <span className="thq-link thq-body-small">{props.link2}</span>
-            <span className="thq-link thq-body-small">{props.link3}</span>
-            <span className="thq-link thq-body-small">{props.link4}</span>
-            <span className="thq-link thq-body-small">{props.link5}</span>
+          <a
+              href="#"
+              className={`thq-link thq-body-small ${activeLink === props.link1 ? 'active-link' : ''}`}
+              onClick={(event) => handleLinkClick(props.link1, event)}
+            >
+              {props.link1}
+            </a>
+            <a
+              href="#"
+              className={`thq-link thq-body-small ${activeLink === props.link2 ? 'active-link' : ''}`}
+              onClick={(event) => handleLinkClick(props.link2, event)}
+            >
+              {props.link2}
+            </a>
+            <a
+              href="#"
+              className={`thq-link thq-body-small ${activeLink === props.link3 ? 'active-link' : ''}`}
+              onClick={(event) => handleLinkClick(props.link3, event)}
+            >
+              {props.link3}
+            </a>
+            <a
+              href="#"
+              className={`thq-link thq-body-small ${activeLink === props.link4 ? 'active-link' : ''}`}
+              onClick={(event) => handleLinkClick(props.link4, event)}
+            >
+              {props.link4}
+            </a>
+            <a
+              href="#"
+              className={`thq-link thq-body-small ${activeLink === props.link5 ? 'active-link' : ''}`}
+              onClick={(event) => handleLinkClick(props.link5, event)}
+            >
+              {props.link5}
+            </a>
           </nav>
         </div>
         <div data-thq="thq-burger-menu" className="navbar2-burger-menu">
@@ -48,11 +86,41 @@ const Navbar2 = (props) => {
               </div>
             </div>
             <nav className="navbar2-links1">
-              <span className="thq-link thq-body-small">{props.link1}</span>
-              <span className="thq-link thq-body-small">{props.link2}</span>
-              <span className="thq-link thq-body-small">{props.link3}</span>
-              <span className="thq-link thq-body-small">{props.link4}</span>
-              <span className="thq-link thq-body-small">{props.link5}</span>
+            <a
+                href="#"
+                className={`thq-link thq-body-small ${activeLink === props.link1 ? 'active-link' : ''}`}
+                onClick={(event) => handleLinkClick(props.link1, event)}
+              >
+                {props.link1}
+              </a>
+              <a
+                href="#"
+                className={`thq-link thq-body-small ${activeLink === props.link2 ? 'active-link' : ''}`}
+                onClick={(event) => handleLinkClick(props.link2, event)}
+              >
+                {props.link2}
+              </a>
+              <a
+                href="#"
+                className={`thq-link thq-body-small ${activeLink === props.link3 ? 'active-link' : ''}`}
+                onClick={(event) => handleLinkClick(props.link3, event)}
+              >
+                {props.link3}
+              </a>
+              <a
+                href="#"
+                className={`thq-link thq-body-small ${activeLink === props.link4 ? 'active-link' : ''}`}
+                onClick={(event) => handleLinkClick(props.link4, event)}
+              >
+                {props.link4}
+              </a>
+              <a
+                href="#"
+                className={`thq-link thq-body-small ${activeLink === props.link5 ? 'active-link' : ''}`}
+                onClick={(event) => handleLinkClick(props.link5, event)}
+              >
+                {props.link5}
+              </a>
             </nav>
           </div>
           <div className="navbar2-icon-group">
@@ -98,7 +166,8 @@ Navbar2.defaultProps = {
   link4: 'Contact Us',
   link2: 'For Businesses',
   logoSrc:
-    'https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&force_format=original',
+    '/Tipzonn-logo.png',
+    onLinkClick: PropTypes.func.isRequired,
 
 }
 
@@ -110,7 +179,7 @@ Navbar2.propTypes = {
   link4: PropTypes.string,
   link2: PropTypes.string,
   logoSrc: PropTypes.string,
-  link5: PropTypes.string,
+  rootClassName: '',
 }
 
 export default Navbar2

@@ -1,5 +1,6 @@
 .navbar2-container {
   width: 100%;
+  height: 100px;
   display: flex;
   position: relative;
   justify-content: center;
@@ -9,14 +10,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding-top: var(--dl-space-space-twounits);
   padding-left: var(--dl-space-space-threeunits);
   padding-right: var(--dl-space-space-threeunits);
-  padding-bottom: var(--dl-space-space-twounits);
   justify-content: space-between;
 }
 .navbar2-image1 {
-  height: 3rem;
+  height: 10rem;
 }
 .navbar2-desktop-menu {
   flex: 1;
@@ -64,7 +63,7 @@
   justify-content: space-between;
 }
 .navbar2-logo {
-  height: 3rem;
+  height: 10rem;
 }
 .navbar2-close-menu {
   display: flex;
@@ -89,6 +88,16 @@
 }
 .navbar2-root-class-name {
   background-color: transparent;
+}
+.thq-link {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #000; /* Set the default color for inactive links */
+  text-decoration: none;
+}
+.active-link {
+  color: #5ce4e4; /* Change the color to cyan */
+  text-decoration: underline; /* Underline the active link */
 }
 @media(max-width: 767px) {
   .navbar2-navbar-interactive {
