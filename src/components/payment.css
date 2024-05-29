@@ -29,12 +29,16 @@
   .header-paymentForm {
     font-size: 20px;
   }
+
+  .logo-container {
+    text-align: left; /* Align the logo to the left */
+  }
   
   .input-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0 60px;
+    margin: 0 0 40px;
   }
   
   .rupee-symbol {
@@ -95,5 +99,12 @@
     margin-top: 10px;
     margin: 0 auto; /* Center the button horizontally */
     display: block; /* Ensure it takes full width and centers */
+  }
+
+  .tipzonn-logo {
+    padding-top: 30px;
+    padding-left: 10px;
+    width: 160px; /* Adjust the size as needed */
+    height: auto;
   }
   

@@ -77,8 +77,13 @@ const PaymentForm = () => {
 
   return (
     <div className="container-paymentForm">
+      <div className="logo-container">
+        <img src="Tipzonnlogo-payment.png" alt="Tipzonn Logo" className="tipzonn-logo" />
+      </div>
       <div className="header-paymentForm">
+      <div className="header-text">
         <h2>Tipping <span id="workerName">{workerName}</span></h2>
+      </div>
       </div>
       <div className="input-container">
         <span className="rupee-symbol">₹</span>
