@@ -1,6 +1,6 @@
-// WorkerGrid.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './workergrid.css'; // Ensure this CSS file is in the same directory
 
 const WorkerGrid = ({ tzId }) => {
   const [workers, setWorkers] = useState([]);
@@ -37,15 +37,17 @@ const WorkerGrid = ({ tzId }) => {
   };
 
   return (
-    <div className="container">
-      <h1 className="heading">{restaurantName}</h1>
-      <h2 className="sub-heading">Select Worker</h2>
-      <div className="grid">
-        {workers.map(worker => (
-          <div key={worker._id} className="card" onClick={() => showPaymentForm(worker.name, worker._id)}>
-            <img src={worker.photo} alt={`Worker ${worker.name}`} />
-            <p>{worker.name}</p>
-            <p>{worker.profession}</p>
+    <div>
+      <h1>{restaurantName}</h1>
+      <div className="worker-grid">
+        {workers.map((worker) => (
+          <div key={worker.id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker.id)}>
+            <div className="worker-image-wrapper">
+              <img src={worker.photo} alt={worker.name} className="worker-image" />
+              <div className="worker-name-overlay">
+                <div className="worker-name">{worker.name}</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

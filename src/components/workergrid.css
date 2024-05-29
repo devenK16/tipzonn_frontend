@@ -1,0 +1,49 @@
+.worker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px;
+}
+
+.worker-card {
+  width: 110px; /* Adjust as necessary for padding/margins */
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 8px; /* Optional: add rounded corners */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+  transition: transform 0.2s; /* Optional: add a hover effect */
+}
+
+.worker-card:hover {
+  transform: scale(1.05); /* Optional: slightly enlarge on hover */
+}
+
+.worker-image-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  margin: 0 auto; /* Center the image wrapper */
+}
+
+.worker-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures the image is center-cropped */
+}
+
+.worker-name-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Grey transparent background */
+  color: white;
+  text-align: center;
+}
+
+.worker-name {
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
