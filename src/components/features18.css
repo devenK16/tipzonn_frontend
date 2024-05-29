@@ -37,9 +37,19 @@
   position: relative;
   align-items: center;
 }
+.thq-section-padding1 {
+  padding-top: 60px; /* Top padding */
+  padding-right: 40px; /* Right padding */
+  padding-left: 40px;
+}
 @media(max-width: 991px) {
   .features18-max-width {
     gap: var(--dl-space-space-twounits);
     flex-direction: column-reverse;
+  }
+  .thq-section-padding1 {
+    padding-top: 20px; /* Top padding */
+    padding-right: 20px; /* Right padding */
+    padding-left: 20px;
   }
 }

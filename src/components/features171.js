@@ -6,7 +6,7 @@ import './features171.css'
 
 const Features171 = (props) => {
   return (
-    <div className="features171-layout349 thq-section-padding">
+    <div className="features171-layout349 thq-section-padding1">
       <div className="features171-max-width thq-section-max-width">
         <div className="features171-image-container">
           <img
