@@ -76,7 +76,7 @@ const PaymentForm = () => {
 
   return (
     <div className="container">
-      <div className="header">
+      <div className="header-paymentForm">
         <h2>Tipping <span id="workerName">{workerName}</span></h2>
       </div>
       <div className="input-container">
