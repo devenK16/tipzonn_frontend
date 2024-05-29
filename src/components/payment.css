@@ -1,7 +1,29 @@
 
   /* Base styles */
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -26,7 +48,9 @@
   }
   
   .header-paymentForm {
-    font-size: 20px;
+    font-size: 26px;
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   .logo-container {
@@ -41,11 +65,11 @@
   }
   
   .rupee-symbol {
-    font-size: 40px;
+    font-size: 30px;
   }
   
   .payment-input {
-    font-size: 40px;
+    font-size: 30px;
     width: 100px;
     text-align: center;
     border: none;
@@ -56,7 +80,8 @@
   .tip-buttons {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+  
   }
   
   .tip-button {
@@ -74,11 +99,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   
   .keypad button {
-    font-size: 20px;
+    font-size: 22px;
     padding: 15px;
     background-color: #fff;
     border: none;
@@ -101,7 +126,6 @@
   }
 
   .tipzonn-logo {
-    padding-top: 30px;
     padding-left: 10px;
     width: 160px; /* Adjust the size as needed */
     height: auto;
