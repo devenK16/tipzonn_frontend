@@ -38,7 +38,17 @@ const WorkerGrid = ({ tzId }) => {
 
   return (
     <div>
-      <h1>{restaurantName}</h1>
+      <div className="logo-container-main">
+        <img src="Tipzonnlogo-payment.png" alt="Tipzonn Logo" className="tipzonn-logo-main" />
+      </div>
+
+    <div className="restaurant-container">
+      {restaurantName}
+    </div>
+
+    <div className="selectWorker-container">
+      Select Worker
+    </div>
       <div className="worker-grid">
         {workers.map((worker) => (
           <div key={worker.id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker.id)}>
