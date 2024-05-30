@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './payment.css';  // Import the payment CSS
 
@@ -17,10 +17,17 @@ const PaymentForm = () => {
   const workerName = new URLSearchParams(window.location.search).get('worker');
   const workerId = new URLSearchParams(window.location.search).get('workerId');
   const userId = new URLSearchParams(window.location.search).get('tzId');
-  const [amount, setAmount] = React.useState(100);
+  const [amount, setAmount] = useState(100);
+  const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
 
   const processPayment = useCallback(async () => {
+    if (amount <= 0) {
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000); // Auto-hide after 3 seconds
+      return;
+    }
+
     const orderData = {
       amount: parseInt(amount),
       currency: 'INR',
@@ -77,13 +84,21 @@ const PaymentForm = () => {
 
   return (
     <div className="container-paymentForm">
+      {/* Notification pop-up */}
+      {showNotification && (
+        <div className={`notification ${showNotification ? 'show' : ''}`}>
+          Tipping Amount must be greater than 0
+          <button className="close-btn" onClick={() => setShowNotification(false)}>×</button>
+        </div>
+      )}
+
       {/* <div className="logo-container">
         <img src="Tipzonnlogo-payment.png" alt="Tipzonn Logo" className="tipzonn-logo" />
       </div> */}
       <div className="header-paymentForm">
-      <div className="header-text">
-        Tipping <span id="workerName">{workerName}</span>
-      </div>
+        <div className="header-text">
+          Tipping <span id="workerName">{workerName}</span>
+        </div>
       </div>
       <div className="input-container">
         <span className="rupee-symbol">₹</span>
@@ -106,7 +121,7 @@ const PaymentForm = () => {
           <button key={number} onClick={() => setAmount(amount + number.toString())}>{number}</button>
         ))}
         <button onClick={() => setAmount('0')}>C</button>
-<button onClick={() => setAmount(String(amount).slice(0, -1))}>←</button>
+        <button onClick={() => setAmount(String(amount).slice(0, -1))}>←</button>
       </div>
       <button className="payment-btn" id="rzp-button1">Pay</button>
     </div>

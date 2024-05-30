@@ -131,3 +131,35 @@
     height: auto;
   }
   
+/* Notification container */
+.notification {
+  position: fixed;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 20px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 600px;
+  transition: top 0.3s ease;
+}
+
+/* Show the notification */
+.notification.show {
+  top: 20px;
+}
+
+/* Close button */
+.notification .close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #721c24;
+}
