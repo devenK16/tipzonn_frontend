@@ -62,6 +62,39 @@ const PaymentForm = () => {
         },
         theme: {
           color: '#00FFFF'
+        },
+        handler: async function (response) {
+          // Handle payment success
+          console.log(response);
+          const payoutData = {
+            account_number: '77770114478163', // Replace with your account number
+            amount: parseInt(amount),
+            currency: 'INR',
+            mode: 'UPI',
+            purpose: 'payout',
+            fund_account: {
+              account_type: 'vpa',
+              vpa: {
+                address: 'sanm2303.10-2@okicici' // Replace with the actual UPI ID
+              }
+            },
+            queue_if_low_balance: true
+          };
+  
+          try {
+            const payoutResponse = await fetch('https://backend.tipzonn.com/api/payment/create-payout', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payoutData)
+            });
+            const payoutResult = await payoutResponse.json();
+            console.log('Payout created successfully:', payoutResult);
+            navigate('/ratingsTest.html');
+          } catch (error) {
+            console.error('Error creating payout:', error);
+          }
         }
       };
 
