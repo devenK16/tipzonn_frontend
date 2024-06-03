@@ -51,7 +51,7 @@ const PaymentForm = () => {
         name: 'Tipzonn',
         description: 'Tip Payment',
         order_id: orderId,
-        callback_url: 'https://www.tipzonn.com/ratingsTest.html',
+        callback_url: 'https://www.tipzonn.com/ratings',
         prefill: {
           name: 'Customer Name',
           email: 'customer.email@example.com',
