@@ -82,7 +82,7 @@ const PaymentForm = () => {
           };
   
           try {
-            const payoutResponse = await fetch('https://backend.tipzonn.com/api/payment/create-payout', {
+            const payoutResponse = await fetch('http://192.168.1.6:8000/api/payment/create-payout', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
