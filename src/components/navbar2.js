@@ -166,7 +166,7 @@ Navbar2.defaultProps = {
   link4: 'Contact Us',
   link2: 'For Businesses',
   logoSrc:
-    '/Tipzonn-logo.png',
+    '/tipzonnLogo_navBar.png',
     onLinkClick: PropTypes.func.isRequired,
 
 }
