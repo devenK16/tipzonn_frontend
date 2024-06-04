@@ -25,35 +25,35 @@ const Navbar2 = (props) => {
           <nav className="navbar2-links">
           <a
               href="#"
-              className={`thq-link thq-body-small ${activeLink === props.link1 ? 'active-link' : ''}`}
+              className={`thq-link1 ${activeLink === props.link1 ? 'active-link' : ''}`}
               onClick={(event) => handleLinkClick(props.link1, event)}
             >
               {props.link1}
             </a>
             <a
               href="#"
-              className={`thq-link thq-body-small ${activeLink === props.link2 ? 'active-link' : ''}`}
+              className={`thq-link1 ${activeLink === props.link2 ? 'active-link' : ''}`}
               onClick={(event) => handleLinkClick(props.link2, event)}
             >
               {props.link2}
             </a>
             <a
               href="#"
-              className={`thq-link thq-body-small ${activeLink === props.link3 ? 'active-link' : ''}`}
+              className={`thq-link1 ${activeLink === props.link3 ? 'active-link' : ''}`}
               onClick={(event) => handleLinkClick(props.link3, event)}
             >
               {props.link3}
             </a>
             <a
               href="#"
-              className={`thq-link thq-body-small ${activeLink === props.link4 ? 'active-link' : ''}`}
+              className={`thq-link1 ${activeLink === props.link4 ? 'active-link' : ''}`}
               onClick={(event) => handleLinkClick(props.link4, event)}
             >
               {props.link4}
             </a>
             <a
               href="#"
-              className={`thq-link thq-body-small ${activeLink === props.link5 ? 'active-link' : ''}`}
+              className={` ${activeLink === props.link5 ? 'active-link' : ''}`}
               onClick={(event) => handleLinkClick(props.link5, event)}
             >
               {props.link5}
@@ -88,35 +88,35 @@ const Navbar2 = (props) => {
             <nav className="navbar2-links1">
             <a
                 href="#"
-                className={`thq-link thq-body-small ${activeLink === props.link1 ? 'active-link' : ''}`}
+                className={`thq-link1 ${activeLink === props.link1 ? 'active-link' : ''}`}
                 onClick={(event) => handleLinkClick(props.link1, event)}
               >
                 {props.link1}
               </a>
               <a
                 href="#"
-                className={`thq-link thq-body-small ${activeLink === props.link2 ? 'active-link' : ''}`}
+                className={`thq-link1 ${activeLink === props.link2 ? 'active-link' : ''}`}
                 onClick={(event) => handleLinkClick(props.link2, event)}
               >
                 {props.link2}
               </a>
               <a
                 href="#"
-                className={`thq-link thq-body-small ${activeLink === props.link3 ? 'active-link' : ''}`}
+                className={`thq-link1 ${activeLink === props.link3 ? 'active-link' : ''}`}
                 onClick={(event) => handleLinkClick(props.link3, event)}
               >
                 {props.link3}
               </a>
               <a
                 href="#"
-                className={`thq-link thq-body-small ${activeLink === props.link4 ? 'active-link' : ''}`}
+                className={`thq-link1 ${activeLink === props.link4 ? 'active-link' : ''}`}
                 onClick={(event) => handleLinkClick(props.link4, event)}
               >
                 {props.link4}
               </a>
               <a
                 href="#"
-                className={`thq-link thq-body-small ${activeLink === props.link5 ? 'active-link' : ''}`}
+                className={`thq-link1 ${activeLink === props.link5 ? 'active-link' : ''}`}
                 onClick={(event) => handleLinkClick(props.link5, event)}
               >
                 {props.link5}
