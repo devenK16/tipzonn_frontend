@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 .hero12-max-width {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 20px; /* Add some padding to the container */
+  padding-top: 80px; /* Add some padding to the container */
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 100px;
   width: 100%; /* Ensure the container takes up the full width */
+  height: 100%;
 }
 .hero12-column {
   gap: 24px;
@@ -12,8 +18,8 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  flex: 1; /* Allow the column to take up available space */
-  gap: 24px;
+  width: 100%;
+  height: 100%;
   max-width: 50%; /* Limit the max width to half the container */
 }
 .hero12-content {
@@ -48,6 +54,21 @@
   width: 100%; /* Ensure the row takes up the full width */
   gap: 20px; /* Add some space between the items */
 }
+
+.hero12-heading1,
+.hero12-content1 {
+  font-family: 'Poppins', sans-serif;
+}
+.hero12-heading1 {
+  font-weight: 600;
+  font-size:xxx-large;
+  padding-bottom: 20px;
+}
+.hero12-content1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+}
+
 @media(max-width: 991px) {
   .hero12-container1 {
     width: 100%;

@@ -8,6 +8,7 @@ import TermsConditions from './pages/TermsConditions';
 import Refunds from './pages/Refund';
 import './App.css';
 import './style.css'
+import './style_1.css'; // Import your styles
 
 function App() {
   return (

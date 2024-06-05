@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './style_1.css'; // Import your styles
 import App from './App';
 
 // function App(){
