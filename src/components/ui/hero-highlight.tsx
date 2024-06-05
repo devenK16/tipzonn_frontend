@@ -2,7 +2,8 @@
 import { cn } from "../../utils/cn";
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
 import React from "react";
- 
+import { useInView } from "react-intersection-observer";
+
 export const HeroHighlight = ({
   children,
   className,
@@ -14,7 +15,7 @@ export const HeroHighlight = ({
 }) => {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
- 
+
   function handleMouseMove({
     currentTarget,
     clientX,
@@ -22,7 +23,7 @@ export const HeroHighlight = ({
   }: React.MouseEvent<HTMLDivElement>) {
     if (!currentTarget) return;
     let { left, top } = currentTarget.getBoundingClientRect();
- 
+
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
@@ -54,12 +55,12 @@ export const HeroHighlight = ({
           `,
         }}
       />
- 
+
       <div className={cn("relative z-20", className)}>{children}</div>
     </div>
   );
 };
- 
+
 export const Highlight = ({
   children,
   className,
@@ -67,13 +68,18 @@ export const Highlight = ({
   children: React.ReactNode;
   className?: string;
 }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1, // Trigger when 10% of the component is in view
+  });
+
   return (
     <motion.span
+      ref={ref}
       initial={{
         backgroundSize: "0% 100%",
       }}
       animate={{
-        backgroundSize: "100% 100%",
+        backgroundSize: inView ? "100% 100%" : "0% 100%",
       }}
       transition={{
         duration: 2,
@@ -86,7 +92,7 @@ export const Highlight = ({
         display: "inline",
       }}
       className={cn(
-        `relative inline-block pb-1   px-1 rounded-lg bg-gradient-to-r from-[#00bfff] to-[#5ce4e4] dark:from-[#00bfff] dark:[#5ce4e4]`,
+        `relative inline-block pb-1 px-1 rounded-lg bg-gradient-to-r from-[#00bfff] to-[#5ce4e4] dark:from-[#00bfff] dark:to-[#5ce4e4]`,
         className
       )}
     >
