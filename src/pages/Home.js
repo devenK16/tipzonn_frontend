@@ -12,6 +12,7 @@ import CTA1 from '../components/cta1';
 import FAQ1 from '../components/faq1';
 import Contact4 from '../components/contact4';
 import Footer4 from '../components/footer4';
+import BenefitsSection from '../components/BenefitsSection'; 
 import './home.css';
 
 function useQuery() {
@@ -70,7 +71,7 @@ const Home = () => {
           <div className="home-hero2">
             <Hero12></Hero12>
           </div>
-          <div className="home-features5" ref={featuresRef}>
+          {/* <div className="home-features5" ref={featuresRef}>
             <Features171
               feature1Title="Simple for your customers"
               feature1Description="Your guests can send cashless tips directly to your staff members. Guests simply scan the QR code on your merchandise or receipt, select the recipient(s) they want to tip, leave a review and pay. There is no app required and the process takes just 3 seconds to complete."
@@ -87,6 +88,9 @@ const Home = () => {
               feature1Title="Simple for Managers & Owners"
               feature1Description="Whether you want to collect individual or common tips, Tipzonn  has you covered. You can be set up for any collection or distribution types and can take care of regulatory requirements no matter if your staff are self-employed, employed or a mix of both. Tipzonn's cashless tipping platform helps you build a consistent and transparent tipping system your staff will love."
             ></Features17>
+          </div> */}
+          <div className="home-benefits" ref={featuresRef}>
+            <BenefitsSection />
           </div>
           <div className="home-cta8" ref={ctaRef}>
             <CTA1
