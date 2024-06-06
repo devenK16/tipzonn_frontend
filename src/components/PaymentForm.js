@@ -51,7 +51,6 @@ const PaymentForm = () => {
         name: 'Tipzonn',
         description: 'Tip Payment',
         order_id: orderId,
-        callback_url: 'https://www.tipzonn.com/ratings',
         prefill: {
           name: 'Customer Name',
           email: 'customer.email@example.com',
@@ -62,7 +61,11 @@ const PaymentForm = () => {
         },
         theme: {
           color: '#00FFFF'
-        }
+        },
+        handler: (response) => {
+          console.log('Payment successful:', response);
+          window.location.href = `https://www.tipzonn.com/ratings?tzId=${userId}`;
+        },
       };
 
       const rzp1 = new window.Razorpay(options);
