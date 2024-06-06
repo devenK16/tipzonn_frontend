@@ -51,14 +51,6 @@ const PaymentForm = () => {
         name: 'Tipzonn',
         description: 'Tip Payment',
         order_id: orderId,
-        prefill: {
-          name: 'Customer Name',
-          email: 'customer.email@example.com',
-          contact: '9000090000'
-        },
-        notes: {
-          address: 'Razorpay Corporate Office'
-        },
         theme: {
           color: '#00FFFF'
         },
