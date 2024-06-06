@@ -54,9 +54,23 @@ const PaymentForm = () => {
         theme: {
           color: '#00FFFF'
         },
-        handler: (response) => {
+        handler: async  (response) => {
           console.log('Payment successful:', response);
-          window.location.href = `https://www.tipzonn.com/ratings?tzId=${userId}`;
+          
+           // Send POST request to update tip information
+          try {
+            await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ amount })
+            });
+            // Redirect to ratings page
+            window.location.href = `https://www.tipzonn.com/ratings?tzId=${userId}`;
+          } catch (error) {
+            console.error('Error updating tip information:', error);
+          }
         },
       };
 
