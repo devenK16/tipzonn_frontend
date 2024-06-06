@@ -3,9 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 const Rating = () => {
   const [user, setUser] = useState(null);
   const [placeId, setPlaceId] = useState(null);
-  const apiKey = 'AIzaSyAljAEF6dH41ODhNtoYtpJWHLKcV4ockno'; // Replace with your actual Google API key
-  const userId = new URLSearchParams(window.location.search).get('tzId');
-  
+   const userId = new URLSearchParams(window.location.search).get('tzId');
+ 
   // Fetch user details
   const fetchUserDetails = useCallback(async () => {
     if (!userId) {
@@ -34,7 +33,7 @@ const Rating = () => {
   // Fetch place ID
   const getPlaceId = useCallback(async (name, address) => {
     const input = `${name}, ${address}`;
-    const endpoint = `https://backend.tipzonn.com/api/place?input=${encodeURIComponent(input)}&key=${apiKey}`;
+    const endpoint = `https://backend.tipzonn.com/api/place?input=${encodeURIComponent(input)}`;
     console.log('Fetching place ID with input:', input);
     console.log('Endpoint:', endpoint);
     try {
@@ -54,7 +53,7 @@ const Rating = () => {
       return null;
     }
   
-  }, [apiKey]);
+  }, []);
 
   // useEffect(() => {
   //   console.log('placeId:', placeId);
