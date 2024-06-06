@@ -51,7 +51,7 @@ const WorkerGrid = ({ tzId }) => {
     </div>
       <div className="worker-grid">
         {workers.map((worker) => (
-          <div key={worker.id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker.id)}>
+          <div key={worker._id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker._id)}>
             <div className="worker-image-wrapper">
               <img src={worker.photo} alt={worker.name} className="worker-image" />
               <div className="worker-name-overlay">
