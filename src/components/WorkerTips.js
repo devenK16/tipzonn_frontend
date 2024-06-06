@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './WorkerTips.css';
 
 function WorkerTips() {
   const { workerId } = useParams();
   const [worker, setWorker] = useState(null);
   const [tips, setTips] = useState([]);
+  const [totalTip, setTotalTip] = useState(0);
 
   useEffect(() => {
     const fetchTips = async () => {
@@ -18,8 +20,11 @@ function WorkerTips() {
 
         setWorker(workerResponse.data);
 
-        const tipsData = tipsResponse.data.length ? tipsResponse.data[0].tips : [];
-        setTips(tipsData.sort((a, b) => new Date(b.date) - new Date(a.date)));
+        if (tipsResponse.data.length) {
+          const tipsData = tipsResponse.data[0].tips;
+          setTips(tipsData.sort((a, b) => new Date(b.date) - new Date(a.date)));
+          setTotalTip(tipsResponse.data[0].totalTip);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -33,17 +38,33 @@ function WorkerTips() {
   }
 
   return (
-    <div>
-      <h1>{worker.name}</h1>
-      <h2>Tips</h2>
-      <ul>
-        {tips.map(tip => (
-          <li key={tip._id}>
-            <div>Date: {new Date(tip.date).toLocaleDateString()}</div>
-            <div>Amount: ${tip.amount.toFixed(2)}</div>
-          </li>
-        ))}
-      </ul>
+    <div className="worker-tips-container">
+      <div className="header">
+        <div className="welcome-message">
+          <h1>Welcome Back,</h1>
+          <h2>{worker.name}</h2>
+        </div>
+        <div className="total-tips-card">
+          <h2>Total Tips</h2>
+          <p>₹{totalTip.toFixed(2)}</p>
+        </div>
+      </div>
+      <div className="tips-list">
+        <h2>Tips</h2>
+        <ul>
+          {tips.map(tip => {
+            const date = new Date(tip.date);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString();
+
+            return (
+              <li key={tip._id}>
+                <div>You have received ₹{tip.amount.toFixed(2)} on {formattedDate} at {formattedTime}</div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
