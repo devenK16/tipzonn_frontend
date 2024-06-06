@@ -91,6 +91,13 @@ const PaymentForm = () => {
     });
   }, [processPayment]);
 
+  const handleKeypadInput = (number) => { //new comment1
+    setAmount((prevAmount) => { //new comment1
+      const newAmount = Number(prevAmount.toString() + number.toString()); //new comment1
+      return newAmount; //new comment1
+    }); //new comment1
+  }; //new comment1
+
   return (
     <div className="container-paymentForm">
       {/* Notification pop-up */}
@@ -116,7 +123,7 @@ const PaymentForm = () => {
           id="paymentAmount"
           className="payment-input"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(Number(e.target.value))} //new comment1
           placeholder="100"
         />
       </div>
@@ -127,10 +134,10 @@ const PaymentForm = () => {
       </div>
       <div className="keypad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(number => (
-          <button key={number} onClick={() => setAmount(amount + number.toString())}>{number}</button>
+          <button key={number} onClick={() => handleKeypadInput(number)}>{number}</button> //new comment1
         ))}
-        <button onClick={() => setAmount('0')}>C</button>
-        <button onClick={() => setAmount(String(amount).slice(0, -1))}>←</button>
+        <button onClick={() => setAmount(0)}>C</button>
+        <button onClick={() => setAmount(Number(String(amount).slice(0, -1)))}>←</button> 
       </div>
       <button className="payment-btn" id="rzp-button1">Pay</button>
     </div>
