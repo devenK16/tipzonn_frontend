@@ -3,6 +3,7 @@
 .worker-tips-container {
   padding: 20px;
   font-family: 'Poppins', sans-serif;
+  color: #324B4B;
 }
 
 .header {
@@ -27,23 +28,25 @@
 }
 
 .total-tips-card {
-  background-color: #f0f0f0;
-  padding: 10px 20px;
-  border: 1px solid #ddd;
+  padding: 20px 26px;
   border-radius: 8px;
   text-align: center;
+  position: relative; /* Ensure it contains absolutely positioned children */
+  overflow: hidden; /* Hide overflow from the meteor effect */
 }
 
 .total-tips-card h2 {
   margin: 0;
   font-size: 1.2em;
   margin-bottom: 5px;
+  color: #324B4B;
 }
 
 .total-tips-card p {
   margin: 0;
   font-size: 1.5em;
   font-weight: bold;
+  color: #324B4B;
 }
 
 .tips-list {
@@ -61,9 +64,16 @@
 }
 
 .tip-item {
-  background-color: #f9f9f9;
+  /* background: rgb(255,255,255);
+  background: linear-gradient(261deg, rgba(255,255,255,1) 0%, rgba(117,220,255,1) 67%, rgba(0,191,255,1) 100%); */
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 10px;
+}
+
+.meteor-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Ensures meteors don't interfere with UI interactions */
+  z-index: 1; /* Ensure it is behind the text but on top of the card background */
 }
