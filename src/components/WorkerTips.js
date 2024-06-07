@@ -41,7 +41,7 @@ function WorkerTips() {
     <div className="worker-tips-container">
       <div className="header">
         <div className="welcome-message">
-          <h1>Welcome Back,</h1>
+          <h1>Welcome,</h1>
           <h2>{worker.name}</h2>
         </div>
         <div className="total-tips-card">
@@ -50,20 +50,20 @@ function WorkerTips() {
         </div>
       </div>
       <div className="tips-list">
-        <h2>Tips</h2>
-        <ul>
+        <h2>Tips Received :</h2>
+        <div className="tips-container">
           {tips.map(tip => {
             const date = new Date(tip.date);
             const formattedDate = date.toLocaleDateString();
             const formattedTime = date.toLocaleTimeString();
 
             return (
-              <li key={tip._id}>
-                <div>You have received ₹{tip.amount.toFixed(2)} on {formattedDate} at {formattedTime}</div>
-              </li>
+              <div key={tip._id} className="tip-item">
+                <div>You have received a tip of ₹{tip.amount.toFixed(2)} on {formattedDate} at {formattedTime}</div>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </div>
   );

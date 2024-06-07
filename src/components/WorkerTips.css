@@ -1,74 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 .worker-tips-container {
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .welcome-message h1, .welcome-message h2 {
-    margin: 0;
-  }
-  
-  .welcome-message h1 {
-    font-size: 1.5em;
-  }
-  
-  .welcome-message h2 {
-    font-size: 1.2em;
-    margin-top: 5px;
-  }
-  
-  .total-tips-card {
-    background-color: #f0f0f0;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .total-tips-card h2 {
-    margin: 0;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-  
-  .total-tips-card p {
-    margin: 0;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  
-  .tips-list {
-    margin-top: 20px;
-  }
-  
-  .tips-list h2 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-  }
-  
-  .tips-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .tips-list li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .tips-list li div {
-    font-size: 1em;
-  }
-  
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.welcome-message h1, .welcome-message h2 {
+  margin: 0;
+}
+
+.welcome-message h1 {
+  font-size: 1.5em;
+}
+
+.welcome-message h2 {
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.total-tips-card {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.total-tips-card h2 {
+  margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.total-tips-card p {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.tips-list {
+  margin-top: 20px;
+}
+
+.tips-list h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.tips-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
