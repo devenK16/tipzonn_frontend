@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import './Rating.css'; // Ensure to import your CSS file
 const Rating = () => {
   const [user, setUser] = useState(null);
   const [placeId, setPlaceId] = useState(null);
@@ -90,7 +90,7 @@ const Rating = () => {
 
   return (
     <div id="rating-container">
-      <img src="rating_meter.png" alt="" width="200" />
+      <img src="rating_meter.png" alt="" width="200" className='rating-container-img'/>
       <p>Rate your experience at the restaurant</p>
       <div className="emoji-ratings">
         {['😞', '😐', '😊', '😀', '😍'].map((emoji, index) => (

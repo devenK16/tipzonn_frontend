@@ -1,0 +1,51 @@
+/* General styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Use Poppins font as the default font for the entire document */
+}
+
+.rating-container {
+  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating-container-img {
+  display: block;
+  margin: 0 auto;
+  size: 50px;
+}
+
+.rating-container p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.emoji-ratings {
+  display: flex;
+  justify-content: space-around;
+  width: 100%; /* Ensure emojis are spread out evenly */
+  user-select: none; /* Disable text selection */
+}
+
+.emoji-ratings div {
+  text-align: center;
+}
+
+.emoji {
+  font-size: 2rem;
+}
+
+.rating-text {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  margin-bottom: 120px;
+  user-select: none; /* Disable text selection */
+}
+
+.feedback-message {
+  font-size: 14px !important;
+  user-select: none; /* Disable text selection */
+}
