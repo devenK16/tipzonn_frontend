@@ -98,6 +98,8 @@ const Rating = () => {
 
       const result = await response.json();
       console.log('Review submitted successfully:', result);
+      
+      setReviewMessage(''); // Clear the review message after submission
       setShowReviewCard(false); // Close the review card after submission
     } catch (error) {
       console.error('Error submitting review:', error);
