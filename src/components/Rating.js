@@ -3,6 +3,8 @@ import './Rating.css'; // Ensure to import your CSS file
 const Rating = () => {
   const [user, setUser] = useState(null);
   const [placeId, setPlaceId] = useState(null);
+  const [showReviewCard, setShowReviewCard] = useState(false);
+  const [reviewMessage, setReviewMessage] = useState('');
    const userId = new URLSearchParams(window.location.search).get('tzId');
  
   // Fetch user details
@@ -74,8 +76,34 @@ const Rating = () => {
           return;
         }
       }
+    } else {
+      setShowReviewCard(true);
     }
   };
+
+  // Handle review submit
+  const handleSubmitReview = async () => {
+    try {
+      const response = await fetch(`https://backend.tipzonn.com/api/reviews/addReview/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reviewText: reviewMessage }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit review');
+      }
+
+      const result = await response.json();
+      console.log('Review submitted successfully:', result);
+      setShowReviewCard(false); // Close the review card after submission
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
+  };
+
 
   useEffect(() => {
     fetchUserDetails();
@@ -87,6 +115,13 @@ const Rating = () => {
       window.location.href = `https://search.google.com/local/reviews?placeid=${placeId}`;
     }
   }, [placeId]);
+
+  // Handle click outside the review card to close it
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains('overlay')) {
+      setShowReviewCard(false);
+    }
+  };
 
   return (
     <div id="rating-container">
@@ -101,6 +136,19 @@ const Rating = () => {
         ))}
       </div>
       <p className="feedback-message">Your feedback helps us get better.</p>
+      {showReviewCard && (
+        <div className="overlay" onClick={handleOutsideClick}>
+          <div className="review-card">
+          <h3>Add your review</h3> 
+            <textarea
+              placeholder="Enter your review to get us better..."
+              value={reviewMessage}
+              onChange={(e) => setReviewMessage(e.target.value)}
+            />
+            <button onClick={handleSubmitReview}>Submit</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
