@@ -5,6 +5,7 @@ const Rating = () => {
   const [placeId, setPlaceId] = useState(null);
   const [showReviewCard, setShowReviewCard] = useState(false);
   const [reviewMessage, setReviewMessage] = useState('');
+  const [showNotification, setShowNotification] = useState(false); // new changes
    const userId = new URLSearchParams(window.location.search).get('tzId');
  
   // Fetch user details
@@ -83,6 +84,11 @@ const Rating = () => {
 
   // Handle review submit
   const handleSubmitReview = async () => {
+    if (!reviewMessage) { // new changes
+      setShowNotification(true); // new changes
+      setTimeout(() => setShowNotification(false), 3000); // new changes
+      return; // new changes
+    }
     try {
       const response = await fetch(`https://backend.tipzonn.com/api/reviews/addReview/${userId}`, {
         method: 'POST',
@@ -127,6 +133,12 @@ const Rating = () => {
 
   return (
     <div id="rating-container">
+      {showNotification && (
+        <div className={`notification ${showNotification ? 'show' : ''}`}>
+          Review cannot be empty
+          <button className="close-btn" onClick={() => setShowNotification(false)}>×</button>
+        </div>
+      )}
       <img src="rating_meter.png" alt="" width="200" className='rating-container-img'/>
       <p>Rate your experience at the restaurant</p>
       <div className="emoji-ratings">
