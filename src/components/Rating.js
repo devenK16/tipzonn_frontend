@@ -5,6 +5,7 @@ const Rating = () => {
   const [placeId, setPlaceId] = useState(null);
   const [showReviewCard, setShowReviewCard] = useState(false);
   const [reviewMessage, setReviewMessage] = useState('');
+  const [selectedRating, setSelectedRating] = useState(null);
   const [showNotification, setShowNotification] = useState(false); // new changes
    const userId = new URLSearchParams(window.location.search).get('tzId');
  
@@ -66,7 +67,8 @@ const Rating = () => {
   // Handle emoji click
   const handleEmojiClick = async (rating) => {
     console.log('handleEmojiClick called with rating:', rating);
-    if (rating >= 3) {
+    setSelectedRating(rating); // Set the selected rating
+    if (rating >= 4) {
       if (user) {
         const userDetails = await fetchUserDetails();
         console.log('Calling getPlaceId with name:', userDetails.name, 'and address:', userDetails.address);
@@ -95,7 +97,7 @@ const Rating = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ reviewText: reviewMessage }),
+        body: JSON.stringify({ reviewText: reviewMessage, rating: selectedRating }),
       });
 
       if (!response.ok) {
