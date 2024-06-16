@@ -16,8 +16,6 @@ const Rating = () => {
       return null;
     }
 
-    console.log('Fetching user details with userId:', userId);
-
     try {
       const response = await fetch(`https://backend.tipzonn.com/api/users/${userId}`);
    
@@ -25,7 +23,6 @@ const Rating = () => {
         throw new Error('Failed to fetch user details');
       }
       const userDetails = await response.json();
-      console.log('userDetails', userDetails);
       setUser(userDetails);
       return userDetails;
     } catch (error) {
@@ -38,13 +35,11 @@ const Rating = () => {
   const getPlaceId = useCallback(async (name, address) => {
     const input = `${name}, ${address}`;
     const endpoint = `https://backend.tipzonn.com/api/place?input=${encodeURIComponent(input)}`;
-    console.log('Fetching place ID with input:', input);
-    console.log('Endpoint:', endpoint);
+
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
-      
-      console.log('Place ID response:', data);
+    
 
       if (data.candidates && data.candidates.length > 0) {
         setPlaceId(data.candidates[0].place_id);
@@ -66,12 +61,10 @@ const Rating = () => {
 
   // Handle emoji click
   const handleEmojiClick = async (rating) => {
-    console.log('handleEmojiClick called with rating:', rating);
     setSelectedRating(rating); // Set the selected rating
     if (rating >= 4) {
       if (user) {
         const userDetails = await fetchUserDetails();
-        console.log('Calling getPlaceId with name:', userDetails.name, 'and address:', userDetails.address);
         if (userDetails) {
           await getPlaceId(userDetails.name, userDetails.address);
         } else {
@@ -105,7 +98,6 @@ const Rating = () => {
       }
 
       const result = await response.json();
-      console.log('Review submitted successfully:', result);
       
       setReviewMessage(''); // Clear the review message after submission
       setShowReviewCard(false); // Close the review card after submission
@@ -121,7 +113,6 @@ const Rating = () => {
 
   useEffect(() => {
     if (placeId) {
-      console.log('placeId:', placeId);
       window.location.href = `https://search.google.com/local/reviews?placeid=${placeId}`;
     }
   }, [placeId]);

@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './payment.css';  // Import the payment CSS
+import './payment.css';  
 
 // Ensure the Razorpay script is loaded
 const loadRazorpayScript = (src) => {
@@ -16,6 +16,7 @@ const loadRazorpayScript = (src) => {
 const PaymentForm = () => {
   const workerName = new URLSearchParams(window.location.search).get('worker');
   const workerId = new URLSearchParams(window.location.search).get('workerId');
+  const workerIds = workerId.split(',');
   const userId = new URLSearchParams(window.location.search).get('tzId');
   const [amount, setAmount] = useState(100);
   const [showNotification, setShowNotification] = useState(false);
@@ -32,7 +33,7 @@ const PaymentForm = () => {
       amount: parseInt(amount),
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
-      notes: { workerName, workerId, userId }
+      notes: { workerName, workerIds, userId }
     };
 
     try {
@@ -59,13 +60,23 @@ const PaymentForm = () => {
           
            // Send POST request to update tip information
           try {
-            await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ amount })
-            });
+            if (workerIds.length > 1) { 
+              await fetch(`https://backend.tipzonn.com/api/tips/multiple`, { 
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  workerIds, amount }) 
+              });
+            } else {
+              await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  amount })
+              });
+            }
             // Redirect to ratings page
             window.location.href = `https://www.tipzonn.com/ratings?tzId=${userId}`;
           } catch (error) {
@@ -79,7 +90,7 @@ const PaymentForm = () => {
     } catch (error) {
       console.error('Error creating order:', error);
     }
-  }, [amount, workerName, workerId, userId]);
+  }, [amount, workerName, workerIds, userId]);
 
   useEffect(() => {
     loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js').then((loaded) => {
@@ -91,12 +102,12 @@ const PaymentForm = () => {
     });
   }, [processPayment]);
 
-  const handleKeypadInput = (number) => { //new comment1
-    setAmount((prevAmount) => { //new comment1
-      const newAmount = Number(prevAmount.toString() + number.toString()); //new comment1
-      return newAmount; //new comment1
-    }); //new comment1
-  }; //new comment1
+  const handleKeypadInput = (number) => { 
+    setAmount((prevAmount) => { 
+      const newAmount = Number(prevAmount.toString() + number.toString()); 
+      return newAmount; 
+    });
+  }; 
 
   return (
     <div className="container-paymentForm">

@@ -36,6 +36,11 @@ const WorkerGrid = ({ tzId }) => {
     navigate(`/payment?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}&tzId=${encodeURIComponent(tzId)}`);
   };
 
+  const showTipAllForm = () => { 
+    const allWorkerIds = workers.map(worker => worker._id).join(','); 
+    navigate(`/payment?worker=All Workers&workerId=${encodeURIComponent(allWorkerIds)}&tzId=${encodeURIComponent(tzId)}`); 
+  };
+
   return (
     <div>
       <div className="logo-container-main">
@@ -60,6 +65,11 @@ const WorkerGrid = ({ tzId }) => {
             </div>
           </div>
         ))}
+        <div className="worker-card tip-all-card" onClick={showTipAllForm}> 
+          <div className="tip-all"> 
+            TIP ALL 
+          </div> 
+        </div> 
       </div>
     </div>
   );
