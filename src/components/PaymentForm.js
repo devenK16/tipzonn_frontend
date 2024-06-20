@@ -78,7 +78,7 @@ const PaymentForm = () => {
               });
             }
             // Redirect to ratings page
-            window.location.href = `https://www.tipzonn.com/ratings?tzId=${userId}`;
+            navigate(`/ratings?tzId=${userId}`);
           } catch (error) {
             console.error('Error updating tip information:', error);
           }
