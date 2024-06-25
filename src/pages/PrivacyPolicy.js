@@ -71,7 +71,7 @@ function PrivacyPolicy() {
 
         <p><strong>Contact Us</strong><br/>
         If you have any questions about this Privacy Policy, please contact us at:</p>
-        <p>Email: <a href="mailto:tipzonn@gmail.com">tipzonn@gmail.com</a></p>
+        <p>Email: <a href="mailto:contact@tipzonn.com">contact@tipzonn.com</a></p>
       </div>
       <div className="home-footer11">
             <Footer4></Footer4>

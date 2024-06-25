@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './payment.css';  // Import the payment CSS
+import './payment.css';  
 
 // Ensure the Razorpay script is loaded
 const loadRazorpayScript = (src) => {
@@ -16,6 +16,7 @@ const loadRazorpayScript = (src) => {
 const PaymentForm = () => {
   const workerName = new URLSearchParams(window.location.search).get('worker');
   const workerId = new URLSearchParams(window.location.search).get('workerId');
+  const workerIds = workerId.split(',');
   const userId = new URLSearchParams(window.location.search).get('tzId');
   const [amount, setAmount] = useState(100);
   const [showNotification, setShowNotification] = useState(false);
@@ -32,7 +33,7 @@ const PaymentForm = () => {
       amount: parseInt(amount),
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
-      notes: { workerName, workerId, userId }
+      notes: { workerName, workerIds, userId }
     };
 
     try {
@@ -51,51 +52,37 @@ const PaymentForm = () => {
         name: 'Tipzonn',
         description: 'Tip Payment',
         order_id: orderId,
-        callback_url: 'https://www.tipzonn.com/ratings',
-        prefill: {
-          name: 'Customer Name',
-          email: 'customer.email@example.com',
-          contact: '9000090000'
-        },
-        notes: {
-          address: 'Razorpay Corporate Office'
-        },
         theme: {
           color: '#00FFFF'
         },
-        handler: async function (response) {
-          // Handle payment success
-          console.log(response);
-          const payoutData = {
-            account_number: '77770114478163', // Replace with your account number
-            amount: parseInt(amount),
-            currency: 'INR',
-            mode: 'UPI',
-            purpose: 'payout',
-            fund_account: {
-              account_type: 'vpa',
-              vpa: {
-                address: 'sanm2303.10-2@okicici' // Replace with the actual UPI ID
-              }
-            },
-            queue_if_low_balance: true
-          };
-  
+        handler: async  (response) => {
+          console.log('Payment successful:', response);
+          
+           // Send POST request to update tip information
           try {
-            const payoutResponse = await fetch('http://192.168.1.6:8000/api/payment/create-payout', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(payoutData)
-            });
-            const payoutResult = await payoutResponse.json();
-            console.log('Payout created successfully:', payoutResult);
-            navigate('/ratingsTest.html');
+            if (workerIds.length > 1) { 
+              await fetch(`https://backend.tipzonn.com/api/tips/multiple`, { 
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  workerIds, amount }) 
+              });
+            } else {
+              await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  amount })
+              });
+            }
+            // Redirect to ratings page
+            navigate(`/ratings?tzId=${userId}`);
           } catch (error) {
-            console.error('Error creating payout:', error);
+            console.error('Error updating tip information:', error);
           }
-        }
+        },
       };
 
       const rzp1 = new window.Razorpay(options);
@@ -103,7 +90,7 @@ const PaymentForm = () => {
     } catch (error) {
       console.error('Error creating order:', error);
     }
-  }, [amount, workerName, workerId, userId]);
+  }, [amount, workerName, workerIds, userId]);
 
   useEffect(() => {
     loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js').then((loaded) => {
@@ -114,6 +101,13 @@ const PaymentForm = () => {
       document.getElementById('rzp-button1').onclick = processPayment;
     });
   }, [processPayment]);
+
+  const handleKeypadInput = (number) => { 
+    setAmount((prevAmount) => { 
+      const newAmount = Number(prevAmount.toString() + number.toString()); 
+      return newAmount; 
+    });
+  }; 
 
   return (
     <div className="container-paymentForm">
@@ -140,7 +134,7 @@ const PaymentForm = () => {
           id="paymentAmount"
           className="payment-input"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(Number(e.target.value))} //new comment1
           placeholder="100"
         />
       </div>
@@ -151,10 +145,10 @@ const PaymentForm = () => {
       </div>
       <div className="keypad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(number => (
-          <button key={number} onClick={() => setAmount(amount + number.toString())}>{number}</button>
+          <button key={number} onClick={() => handleKeypadInput(number)}>{number}</button> //new comment1
         ))}
-        <button onClick={() => setAmount('0')}>C</button>
-        <button onClick={() => setAmount(String(amount).slice(0, -1))}>←</button>
+        <button onClick={() => setAmount(0)}>C</button>
+        <button onClick={() => setAmount(Number(String(amount).slice(0, -1)))}>←</button> 
       </div>
       <button className="payment-btn" id="rzp-button1">Pay</button>
     </div>

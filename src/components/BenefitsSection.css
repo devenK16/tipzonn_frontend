@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* BenefitsSection.css */
+.benefits-section {
+  text-align: center;
+  margin: 2rem 0;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 25px;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(255, 255, 255);
+  background: linear-gradient(222deg, rgba(255, 255, 255, 1) 50%, rgba(92, 228, 228, 1) 100%); */
+}
+
+.benefits-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 20px;
+}
+
+.buttons {
+  margin: 1rem 0;
+}
+
+.buttons button {
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.benefits-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease; /* Add transition */
+}
+
+.benefits-content img {
+  width: 50%;
+  height: auto;
+  transition: all 0.5s ease; /* Add transition */
+}
+
+.text-content {
+  width: 50%;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.5s ease; /* Add transition */
+
+}
+
+.benefits-subheading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.benefits-description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.benefits-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.benefits-item {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.checkmark {
+  color: #32CD32;
+  font-size: 22px;
+  font-weight: bolder;
+  margin-right: 0.5rem;
+}
+.highlight{
+  color: #00bfff; 
+}
+.bg-custom-color {
+  background-color: #00bfff;
+}
+.border-custom-color {
+  border-color: #00bfff;
+}
+.buttons button:hover {
+  background-color: #00bfff;
+  color: #000000;
+  border-color: #00bfff;
+}
+
+.customer .benefits-content img,
+.employee .benefits-content img,
+.manager .benefits-content img,
+.customer .text-content,
+.employee .text-content,
+.manager .text-content {
+  transition: all 0.5s ease;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .benefits-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .benefits-content {
+    flex-direction: column;
+  }
+
+  .benefits-content img,
+  .text-content {
+    width: 100%;
+  }
+
+  .benefits-content img {
+    margin-bottom: 1rem;
+  }
+
+  .benefits-heading {
+    font-size: 1.5rem;
+  }
+
+  .benefits-subheading {
+    font-size: 1.25rem;
+  }
+
+  .benefits-description {
+    font-size: 0.875rem;
+  }
+
+  .benefits-item {
+    font-size: 0.875rem;
+  }
+}

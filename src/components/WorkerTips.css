@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.worker-tips-container {
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #324B4B;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.welcome-message h1, .welcome-message h2 {
+  margin: 0;
+}
+
+.welcome-message h1 {
+  font-size: 1.5em;
+}
+
+.welcome-message h2 {
+  font-size: 1.2em;
+  margin-top: 5px;
+}
+
+.total-tips-card {
+  padding: 20px 26px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative; /* Ensure it contains absolutely positioned children */
+  overflow: hidden; /* Hide overflow from the meteor effect */
+}
+
+.total-tips-card h2 {
+  margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #324B4B;
+}
+
+.total-tips-card p {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #324B4B;
+}
+
+.tips-list {
+  margin-top: 20px;
+}
+
+.tips-list h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.tips-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-item {
+  /* background: rgb(255,255,255);
+  background: linear-gradient(261deg, rgba(255,255,255,1) 0%, rgba(117,220,255,1) 67%, rgba(0,191,255,1) 100%); */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.meteor-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Ensures meteors don't interfere with UI interactions */
+  z-index: 1; /* Ensure it is behind the text but on top of the card background */
+}
