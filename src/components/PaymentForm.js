@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {Divider} from "@nextui-org/react";
 import './payment.css';  
 
 // Ensure the Razorpay script is loaded
@@ -138,17 +139,17 @@ const PaymentForm = () => {
           placeholder="100"
         />
       </div>
+        
+      <Divider className="my-4" />
+      
       <div className="tip-buttons">
-        <button className="tip-button" onClick={() => setAmount(50)}>50</button>
-        <button className="tip-button" onClick={() => setAmount(100)}>100</button>
-        <button className="tip-button" onClick={() => setAmount(150)}>150</button>
+        <button className="tip-button"><span>₹</span>50</button>
+        <button className="tip-button"><span>₹</span>100</button>
+        <button className="tip-button"><span>₹</span>150</button>
       </div>
-      <div className="keypad">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(number => (
-          <button key={number} onClick={() => handleKeypadInput(number)}>{number}</button> //new comment1
-        ))}
-        <button onClick={() => setAmount(0)}>C</button>
-        <button onClick={() => setAmount(Number(String(amount).slice(0, -1)))}>←</button> 
+      <div className="custom-buttons">
+        <button className="custom-button">Custom</button>
+        <button className="custom-button">%</button>
       </div>
       <button className="payment-btn" id="rzp-button1">Pay</button>
     </div>
