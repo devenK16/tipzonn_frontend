@@ -25,6 +25,32 @@ const PaymentForm = () => {
   const currency = '₹';
   const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
+  const [billAmount, setBillAmount] = useState(0);
+  const [tipPercentage, setTipPercentage] = useState(0);
+  const [calculatedTip, setCalculatedTip] = useState(0);
+
+  const percentages = [
+    { icon: '🙂', value: 10 },
+    { icon: '😁', value: 15 },
+    { icon: '😍', value: 20 },
+    { icon: '🫶', value: 25 }
+  ];
+
+  const handleBillAmountChange = (value) => {
+    setBillAmount(value);
+    calculateTip(value, tipPercentage);
+  };
+
+  const handleTipPercentageChange = (value) => {
+    setTipPercentage(value);
+    calculateTip(billAmount, value);
+  };
+
+  const calculateTip = (bill, percentage) => {
+    const tip = (bill * percentage) / 100;
+    setCalculatedTip(Number(tip.toFixed(2)));
+    setAmount(tip); // Update the main amount state
+  };
 
   const processPayment = useCallback(async () => {
     if (amount <= 0) {
@@ -110,6 +136,22 @@ const PaymentForm = () => {
     setAmount(value);
   };
 
+  const handlePercentageConfirm = useCallback(async () => {
+    if (calculatedTip <= 0) {
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000);
+      return;
+    }
+
+    // Close the drawer
+    // You might need to implement a way to control the drawer's open state
+    // For example, you could add a state variable like `isPercentageDrawerOpen`
+    // setIsPercentageDrawerOpen(false);
+
+    // Process the payment
+    await processPayment();
+  }, [calculatedTip, processPayment]);
+
   return (
     <div className="container-paymentForm">
       {/* Notification pop-up */}
@@ -174,7 +216,73 @@ const PaymentForm = () => {
             </Drawer.Content>
           </Drawer.Portal>
         </Drawer.Root>
-        <button className="custom-button">%</button>
+
+        <Drawer.Root>
+          <Drawer.Trigger asChild>
+            <button className="custom-button">%</button>
+          </Drawer.Trigger>
+          <Drawer.Portal>
+            <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+            <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0">
+              <div className="p-4 bg-white rounded-t-[10px] flex-1">
+                <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
+                <div className="max-w-md mx-auto text-center">
+                  <Drawer.Title className="font-semibold lg:text-xl text-lg font-normal mb-6 text-center">
+                    Calculate Tip
+                  </Drawer.Title>
+                  
+                  <div className="mb-10">
+                    <label className="block text-black font-medium lg:text-xl text-lg">
+                      Enter Bill Amount
+                    </label>
+                    <CurrencyInput
+                      value={billAmount}
+                      onChange={(value) => handleBillAmountChange(Number(value))}
+                      currency={currency}
+                    />
+                  </div>
+
+                  <div className="mb-10">
+                    <label className="block text-black font-medium lg:text-xl text-lg mb-2">
+                      Quality of service
+                    </label>
+                    <div className="emoji-buttons">
+                      {percentages.map((data, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleTipPercentageChange(data.value)}
+                          className={`emoji-button ${tipPercentage === data.value ? 'active' : ''}`}
+                        >
+                          <span className="emoji">{data.icon}</span>
+                          <span className="percentage">{data.value}%</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-8">
+                    <label className="block text-black font-medium lg:text-xl text-lg mb-1">
+                      Calculated Tip
+                    </label>
+                    <div className="p-2 bg-gray-100 rounded">
+                      {currency}{calculatedTip.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-white mt-auto">
+                <div className="flex gap-6 justify-end max-w-md mx-auto mb-10">
+                  <button 
+                    className="payment-btn" 
+                    onClick={handlePercentageConfirm}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </Drawer.Content>
+          </Drawer.Portal>
+        </Drawer.Root>
       </div>
       <button className="payment-btn" id="rzp-button1">Confirm</button>
     </div>

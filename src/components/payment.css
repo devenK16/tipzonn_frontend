@@ -194,8 +194,9 @@
 
 .currency-symbol {
   position: absolute;
+  font-size: 16px;
   left: 10px;
-  top: 50%;
+  top: 57%;
   transform: translateY(-50%);
   pointer-events: none;
   color: #000000;
@@ -210,4 +211,46 @@
   height: 40px; /* Adjust as needed */
   line-height: 40px; /* Match the height */
   
+}
+
+.emoji-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.emoji-button {
+  width: 70px;
+  height: 70px;
+  font-size: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emoji-button:hover {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.emoji-button .emoji {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.emoji-button .percentage {
+  font-size: 16px;
+}
+
+.emoji-button.active {
+  background-color: #5ce1e6;
+  color: #ffffff;
 }
