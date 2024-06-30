@@ -90,6 +90,11 @@
   margin-left: 2px;
 }
 
+.tip-button.selected {
+  background-color: #5ce1e6; /* Example color */
+  color: white; /* Change text color if needed */
+}
+
 .custom-buttons {
   display: flex;
   justify-content: space-around;

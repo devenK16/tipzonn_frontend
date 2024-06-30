@@ -28,6 +28,7 @@ const PaymentForm = () => {
   const [billAmount, setBillAmount] = useState(0);
   const [tipPercentage, setTipPercentage] = useState(0);
   const [calculatedTip, setCalculatedTip] = useState(0);
+  const [selectedAmount, setSelectedAmount] = useState(null);
 
   const percentages = [
     { icon: '🙂', value: 10 },
@@ -49,7 +50,21 @@ const PaymentForm = () => {
   const calculateTip = (bill, percentage) => {
     const tip = (bill * percentage) / 100;
     setCalculatedTip(Number(tip.toFixed(2)));
-    setAmount(tip); // Update the main amount state
+    handleAmountChange(tip); // Update the main amount state
+  };
+
+  const handleButtonClick = (value) => {
+    setAmount(value);
+    setSelectedAmount(value);
+  };
+
+  const handleAmountChange = (value) => {
+    setAmount(value);
+    if ([50, 100, 150].includes(value)) {
+      setSelectedAmount(value);
+    } else {
+      setSelectedAmount(null);
+    }
   };
 
   const processPayment = useCallback(async () => {
@@ -132,10 +147,6 @@ const PaymentForm = () => {
     });
   }, [processPayment]);
 
-  const handleAmountChange = (value) => {
-    setAmount(value);
-  };
-
   const handlePercentageConfirm = useCallback(async () => {
     if (calculatedTip <= 0) {
       setShowNotification(true);
@@ -174,7 +185,7 @@ const PaymentForm = () => {
           id="paymentAmount"
           className="payment-input"
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
+          onChange={(e) => handleAmountChange(Number(e.target.value))}
           placeholder="100"
         />
       </div>
@@ -182,9 +193,24 @@ const PaymentForm = () => {
       <Divider className="my-4" />
 
       <div className="tip-buttons">
-        <button className="tip-button"><span>₹</span>50</button>
-        <button className="tip-button"><span>₹</span>100</button>
-        <button className="tip-button"><span>₹</span>150</button>
+      <button
+          className={`tip-button ${selectedAmount === 50 ? 'selected' : ''}`}
+          onClick={() => handleButtonClick(50)}
+        >
+          <span>₹</span>50
+        </button>
+        <button
+          className={`tip-button ${selectedAmount === 100 ? 'selected' : ''}`}
+          onClick={() => handleButtonClick(100)}
+        >
+          <span>₹</span>100
+        </button>
+        <button
+          className={`tip-button ${selectedAmount === 150 ? 'selected' : ''}`}
+          onClick={() => handleButtonClick(150)}
+        >
+          <span>₹</span>150
+        </button>
       </div>
       
       <div className="custom-buttons">
@@ -203,7 +229,7 @@ const PaymentForm = () => {
                   </Drawer.Title>
                   <CurrencyInput
                     value={amount}
-                    onChange={(value) => setAmount(Number(value))}
+                    onChange={(value) => handleAmountChange(Number(value))}
                     currency={currency}
                   />
                 </div>
