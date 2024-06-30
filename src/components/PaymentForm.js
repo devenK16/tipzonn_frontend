@@ -1,7 +1,9 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Divider} from "@nextui-org/react";
-import './payment.css';  
+import { Divider } from "@nextui-org/react";
+import { Drawer } from 'vaul';
+import CurrencyInput from '../components/ui/CurrencyInput';
+import './payment.css';
 
 // Ensure the Razorpay script is loaded
 const loadRazorpayScript = (src) => {
@@ -20,6 +22,7 @@ const PaymentForm = () => {
   const workerIds = workerId.split(',');
   const userId = new URLSearchParams(window.location.search).get('tzId');
   const [amount, setAmount] = useState(100);
+  const currency = '₹';
   const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
 
@@ -56,18 +59,18 @@ const PaymentForm = () => {
         theme: {
           color: '#00FFFF'
         },
-        handler: async  (response) => {
+        handler: async (response) => {
           console.log('Payment successful:', response);
-          
-           // Send POST request to update tip information
+
+          // Send POST request to update tip information
           try {
-            if (workerIds.length > 1) { 
-              await fetch(`https://backend.tipzonn.com/api/tips/multiple`, { 
+            if (workerIds.length > 1) {
+              await fetch(`https://backend.tipzonn.com/api/tips/multiple`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({  workerIds, amount }) 
+                body: JSON.stringify({ workerIds, amount })
               });
             } else {
               await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
@@ -75,7 +78,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({  amount })
+                body: JSON.stringify({ amount })
               });
             }
             // Redirect to ratings page
@@ -103,12 +106,9 @@ const PaymentForm = () => {
     });
   }, [processPayment]);
 
-  const handleKeypadInput = (number) => { 
-    setAmount((prevAmount) => { 
-      const newAmount = Number(prevAmount.toString() + number.toString()); 
-      return newAmount; 
-    });
-  }; 
+  const handleAmountChange = (value) => {
+    setAmount(value);
+  };
 
   return (
     <div className="container-paymentForm">
@@ -120,9 +120,6 @@ const PaymentForm = () => {
         </div>
       )}
 
-      {/* <div className="logo-container">
-        <img src="Tipzonnlogo-payment.png" alt="Tipzonn Logo" className="tipzonn-logo" />
-      </div> */}
       <div className="header-paymentForm">
         <div className="header-text">
           Tipping <span id="workerName">{workerName}</span>
@@ -135,23 +132,51 @@ const PaymentForm = () => {
           id="paymentAmount"
           className="payment-input"
           value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))} //new comment1
+          onChange={(e) => setAmount(Number(e.target.value))}
           placeholder="100"
         />
       </div>
-        
+
       <Divider className="my-4" />
-      
+
       <div className="tip-buttons">
         <button className="tip-button"><span>₹</span>50</button>
         <button className="tip-button"><span>₹</span>100</button>
         <button className="tip-button"><span>₹</span>150</button>
       </div>
+      
       <div className="custom-buttons">
-        <button className="custom-button">Custom</button>
+        <Drawer.Root>
+          <Drawer.Trigger asChild>
+            <button className="custom-button">Custom</button>
+          </Drawer.Trigger>
+          <Drawer.Portal>
+            <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+            <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0">
+              <div className="p-4 bg-white rounded-t-[10px] flex-1">
+                <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
+                <div className="max-w-md mx-auto text-center">
+                  <Drawer.Title className="font-medium mb-6">
+                    Enter Tip Amount
+                  </Drawer.Title>
+                  <CurrencyInput
+                    value={amount}
+                    onChange={(value) => setAmount(Number(value))}
+                    currency={currency}
+                  />
+                </div>
+              </div>
+              <div className="p-4 bg-white mt-auto">
+                <div className="flex gap-6 justify-end max-w-md mx-auto mb-6 mt-3">
+                  <button className="payment-btn" onClick={processPayment}>Confirm</button>
+                </div>
+              </div>
+            </Drawer.Content>
+          </Drawer.Portal>
+        </Drawer.Root>
         <button className="custom-button">%</button>
       </div>
-      <button className="payment-btn" id="rzp-button1">Pay</button>
+      <button className="payment-btn" id="rzp-button1">Confirm</button>
     </div>
   );
 };

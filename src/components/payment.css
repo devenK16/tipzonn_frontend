@@ -172,4 +172,42 @@
   cursor: pointer;
   color: #721c24;
 }
+.bottom-sheet-content {
+  padding: 16px;
+  background: white;
+  border-radius: 16px 16px 0 0;
+}
 
+.custom-amount-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.currency-input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #000000;
+}
+
+.custom-amount-input {
+  padding-left: 25px; /* Adjust this value to create space for the currency symbol */
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  height: 40px; /* Adjust as needed */
+  line-height: 40px; /* Match the height */
+  
+}
