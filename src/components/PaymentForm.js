@@ -272,7 +272,7 @@ const PaymentForm = () => {
                     <label className="block text-black font-medium lg:text-xl text-lg mb-2">
                       Quality of service
                     </label>
-                    <div className="emoji-buttons">
+                    <div className="emoji-buttons ">
                       {percentages.map((data, index) => (
                         <button
                           key={index}
