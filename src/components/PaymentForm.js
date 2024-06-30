@@ -21,7 +21,7 @@ const PaymentForm = () => {
   const workerId = new URLSearchParams(window.location.search).get('workerId');
   const workerIds = workerId.split(',');
   const userId = new URLSearchParams(window.location.search).get('tzId');
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(50);
   const currency = '₹';
   const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
@@ -210,7 +210,7 @@ const PaymentForm = () => {
               </div>
               <div className="p-4 bg-white mt-auto">
                 <div className="flex gap-6 justify-end max-w-md mx-auto mb-6 mt-3">
-                  <button className="payment-btn" onClick={processPayment}>Confirm</button>
+                  <button className="payment-btn" onClick={processPayment}>Confirm {currency}{amount.toFixed(2)}</button>
                 </div>
               </div>
             </Drawer.Content>
@@ -276,7 +276,7 @@ const PaymentForm = () => {
                     className="payment-btn" 
                     onClick={handlePercentageConfirm}
                   >
-                    Confirm
+                    Confirm {currency}{amount.toFixed(2)}
                   </button>
                 </div>
               </div>
@@ -284,7 +284,7 @@ const PaymentForm = () => {
           </Drawer.Portal>
         </Drawer.Root>
       </div>
-      <button className="payment-btn" id="rzp-button1">Confirm</button>
+      <button className="payment-btn" id="rzp-button1">Confirm {currency}{amount.toFixed(2)}</button>
     </div>
   );
 };
