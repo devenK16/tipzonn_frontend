@@ -29,6 +29,12 @@ const PaymentForm = () => {
   const [tipPercentage, setTipPercentage] = useState(0);
   const [calculatedTip, setCalculatedTip] = useState(0);
   const [selectedAmount, setSelectedAmount] = useState(null);
+  const [workerPhoto, setWorkerPhoto] = useState('');
+  const workerPhotoParam = new URLSearchParams(window.location.search).get('workerPhoto');
+
+  useEffect(() => {
+    setWorkerPhoto(workerPhotoParam);
+  }, [workerPhotoParam]);
 
   const percentages = [
     { icon: '🙂', value: 10 },
@@ -164,7 +170,11 @@ const PaymentForm = () => {
   }, [calculatedTip, processPayment]);
 
   return (
+    
     <div className="container-paymentForm">
+      <div className="logo-container-main">
+        <img src="Tipzonnlogo-payment.png" alt="Tipzonn Logo" className="tipzonn-logo-main" />
+      </div>
       {/* Notification pop-up */}
       {showNotification && (
         <div className={`notification ${showNotification ? 'show' : ''}`}>
@@ -174,11 +184,18 @@ const PaymentForm = () => {
       )}
 
       <div className="header-paymentForm">
-        <div className="header-text">
-          Tipping <span id="workerName">{workerName}</span>
-        </div>
+         <div className="worker-photo-container-payment">
+            {workerPhoto && (
+              <div className="worker-image-wrapper-payment">
+                <img src={workerPhoto} alt="Worker" className="worker-image-payment" />
+              </div>
+            )}
+          </div>
+          <div className="header-text">
+            Tipping <span id="workerName">{workerName}</span>
+          </div>
       </div>
-      <div className="input-container">
+      {/* <div className="input-container">
         <span className="rupee-symbol">₹</span>
         <input
           type="number"
@@ -188,9 +205,9 @@ const PaymentForm = () => {
           onChange={(e) => handleAmountChange(Number(e.target.value))}
           placeholder="100"
         />
-      </div>
+      </div> */}
 
-      <Divider className="my-4" />
+      <Divider className="my-4 mb-8" />
 
       <div className="tip-buttons">
       <button
