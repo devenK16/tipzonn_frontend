@@ -37,39 +37,39 @@
 }
 
 .worker-card {
-  width: 110px; /* Adjust as necessary for padding/margins */
+  flex: 1 1 110px; /* Allow the card to grow and shrink, with an initial width of 110px */
   cursor: pointer;
   text-align: center;
-  border: 1px solid #ccc; /* Add a border */
-  border-radius: 8px; /* Optional: add rounded corners */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-  transition: transform 0.2s; /* Optional: add a hover effect */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 .worker-card:hover {
-  transform: scale(1.05); /* Optional: slightly enlarge on hover */
+  transform: scale(1.05);
 }
 
 .worker-image-wrapper {
   position: relative;
-  width: 114px;
+  width: 100%;
   height: 130px;
-  border-radius: 8px; /* Optional: add rounded corners */
+  border-radius: 8px;
   overflow: hidden;
-  margin: 0 auto; /* Center the image wrapper */
+  margin: 0 auto;
 }
 
 .worker-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* This ensures the image is center-cropped */
+  object-fit: cover;
 }
 
 .worker-name-overlay {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Grey transparent background */
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   text-align: center;
 }
@@ -80,14 +80,14 @@
 }
 
 .tip-all-card {
-  background-color: grey; /* Change the background color */
+  background-color: grey;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 114px;
+  flex: 1 1 110px; /* Ensure the tip-all card behaves the same as worker cards */
 }
 
 .tip-all {
   font-size: 22px;
-  color: #FFFFFF; /* Change text color if needed */
+  color: #FFFFFF;
 }

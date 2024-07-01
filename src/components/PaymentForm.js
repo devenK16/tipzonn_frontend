@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState , useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Divider } from "@nextui-org/react";
 import { Drawer } from 'vaul';
@@ -31,6 +31,8 @@ const PaymentForm = () => {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [workerPhoto, setWorkerPhoto] = useState('');
   const workerPhotoParam = new URLSearchParams(window.location.search).get('workerPhoto');
+  const [showInfoCard, setShowInfoCard] = useState(false);
+  const infoCardRef = useRef(null);
 
   useEffect(() => {
     setWorkerPhoto(workerPhotoParam);
@@ -168,6 +170,29 @@ const PaymentForm = () => {
     // Process the payment
     await processPayment();
   }, [calculatedTip, processPayment]);
+
+  const handleInfoIconClick = () => {
+    setShowInfoCard(!showInfoCard);
+  };
+
+  const handleClickOutside = (event) => {
+    if (infoCardRef.current && !infoCardRef.current.contains(event.target)) {
+      setShowInfoCard(false);
+    }
+  };
+  
+  useEffect(() => {
+    if (showInfoCard) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showInfoCard]);
+
 
   return (
     
@@ -326,6 +351,29 @@ const PaymentForm = () => {
             </Drawer.Content>
           </Drawer.Portal>
         </Drawer.Root>
+      </div>
+      <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center">
+          <input type="checkbox" id="fee" name="transactions" className="mr-2" />
+          <label htmlFor="fee" className="text-gray-700">Pay transaction costs 🩵</label>
+        </div>
+        <div className="flex justify-center items-center relative">
+          <div 
+            id="trigger" 
+            className="text-gray-400 border border-gray-500 h-4 w-4 rounded-full text-center text-xs cursor-pointer" 
+            onClick={handleInfoIconClick}
+          >
+            i
+          </div>
+          {showInfoCard && (
+            <>
+              <div className="overlay" onClick={() => setShowInfoCard(false)}></div>
+              <div ref={infoCardRef} className="info-card">
+                This way the staff will receive the full amount of tip
+              </div>
+            </>
+          )}
+        </div>
       </div>
       <button className="payment-btn" id="rzp-button1">Confirm {currency}{amount.toFixed(2)}</button>
     </div>
