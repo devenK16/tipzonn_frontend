@@ -33,6 +33,7 @@ const PaymentForm = () => {
   const workerPhotoParam = new URLSearchParams(window.location.search).get('workerPhoto');
   const [showInfoCard, setShowInfoCard] = useState(false);
   const infoCardRef = useRef(null);
+  const [isCheckedFee, setIsCheckedFee] = useState(false);
 
   useEffect(() => {
     setWorkerPhoto(workerPhotoParam);
@@ -86,7 +87,7 @@ const PaymentForm = () => {
       amount: parseInt(amount),
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
-      notes: { workerName, workerIds, userId }
+      notes: { workerName, workerIds, userId , isCheckedFee  }
     };
 
     try {
@@ -119,7 +120,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ workerIds, amount })
+                body: JSON.stringify({ workerIds, amount , isCheckedFee })
               });
             } else {
               await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
@@ -127,7 +128,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ amount })
+                body: JSON.stringify({ amount , isCheckedFee })
               });
             }
             // Redirect to ratings page
@@ -143,7 +144,7 @@ const PaymentForm = () => {
     } catch (error) {
       console.error('Error creating order:', error);
     }
-  }, [amount, workerName, workerIds, userId]);
+  }, [amount, workerName, workerIds, userId , isCheckedFee]);
 
   useEffect(() => {
     loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js').then((loaded) => {
@@ -354,7 +355,13 @@ const PaymentForm = () => {
       </div>
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center">
-          <input type="checkbox" id="fee" name="transactions" className="mr-2" />
+          <input 
+              type="checkbox" 
+              id="fee" 
+              name="transactions" 
+              className="mr-2" 
+              onChange={(e) => setIsCheckedFee(e.target.checked)}
+            />
           <label htmlFor="fee" className="text-gray-700">Pay transaction costs 🩵</label>
         </div>
         <div className="flex justify-center items-center relative">
