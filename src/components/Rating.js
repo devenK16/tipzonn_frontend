@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './Rating.css'; // Ensure to import your CSS file
 const Rating = () => {
   const [user, setUser] = useState(null);
@@ -6,9 +7,12 @@ const Rating = () => {
   const [showReviewCard, setShowReviewCard] = useState(false);
   const [reviewMessage, setReviewMessage] = useState('');
   const [selectedRating, setSelectedRating] = useState(null);
-  const [showNotification, setShowNotification] = useState(false); // new changes
-   const userId = new URLSearchParams(window.location.search).get('tzId');
- 
+  const [showNotification, setShowNotification] = useState(false);
+  const [showThankYouCard, setShowThankYouCard] = useState(false); // State for thank you card
+  const [countdown, setCountdown] = useState(7); // State for countdown
+  const userId = new URLSearchParams(window.location.search).get('tzId');
+  const navigate = useNavigate();
+
   // Fetch user details
   const fetchUserDetails = useCallback(async () => {
     if (!userId) {
@@ -79,10 +83,10 @@ const Rating = () => {
 
   // Handle review submit
   const handleSubmitReview = async () => {
-    if (!reviewMessage) { // new changes
-      setShowNotification(true); // new changes
-      setTimeout(() => setShowNotification(false), 3000); // new changes
-      return; // new changes
+    if (!reviewMessage) { 
+      setShowNotification(true); 
+      setTimeout(() => setShowNotification(false), 3000); 
+      return; 
     }
     try {
       const response = await fetch(`https://backend.tipzonn.com/api/reviews/addReview/${userId}`, {
@@ -101,6 +105,18 @@ const Rating = () => {
       
       setReviewMessage(''); // Clear the review message after submission
       setShowReviewCard(false); // Close the review card after submission
+      setShowThankYouCard(true); // Show thank you card
+      // Start countdown
+      const countdownInterval = setInterval(() => {
+        setCountdown(prevCountdown => {
+          if (prevCountdown <= 1) {
+            clearInterval(countdownInterval);
+            window.location.href = 'https://www.tipzonn.com'; // Redirect to the specified URL
+            return 0;
+          }
+          return prevCountdown - 1;
+        });
+      }, 1000);
     } catch (error) {
       console.error('Error submitting review:', error);
     }
@@ -153,6 +169,26 @@ const Rating = () => {
               onChange={(e) => setReviewMessage(e.target.value)}
             />
             <button onClick={handleSubmitReview}>Submit</button>
+          </div>
+        </div>
+      )}
+      {showThankYouCard && (
+        <div className="overlay">
+          <div className="thank-you-card">
+            <h3>Thank you for being generous!</h3>
+            <div className="main-container">
+              <div className="check-container">
+                <div className="check-background">
+                  <svg viewBox="0 0 65 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 25L27.3077 44L58.5 7" stroke="white" strokeWidth="13" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="check-shadow"></div>
+              </div>
+            </div>
+            <p1>Your review has been submitted</p1>
+            <p>Learn more about us <a href="https://www.tipzonn.com">here</a>.</p>
+            <p>Redirecting you to our website in {countdown} seconds...</p>
           </div>
         </div>
       )}

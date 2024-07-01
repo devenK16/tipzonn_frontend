@@ -32,8 +32,8 @@ const WorkerGrid = ({ tzId }) => {
     fetchRestaurantName();
   }, [tzId]);
 
-  const showPaymentForm = (workerName, workerId) => {
-    navigate(`/payment?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}&tzId=${encodeURIComponent(tzId)}`);
+  const showPaymentForm = (workerName, workerId , workerPhoto) => {
+    navigate(`/payment?worker=${encodeURIComponent(workerName)}&workerId=${encodeURIComponent(workerId)}&tzId=${encodeURIComponent(tzId)}&workerPhoto=${encodeURIComponent(workerPhoto)}`);
   };
 
   const showTipAllForm = () => { 
@@ -56,7 +56,7 @@ const WorkerGrid = ({ tzId }) => {
     </div>
       <div className="worker-grid">
         {workers.map((worker) => (
-          <div key={worker._id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker._id)}>
+          <div key={worker._id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker._id , worker.photo)}>
             <div className="worker-image-wrapper">
               <img src={worker.photo} alt={worker.name} className="worker-image" />
               <div className="worker-name-overlay">
