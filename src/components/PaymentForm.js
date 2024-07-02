@@ -68,7 +68,11 @@ const PaymentForm = () => {
   };
 
   const handleAmountChange = (value) => {
-    setAmount(value);
+    let finalAmount = value;
+    if (isCheckedFee) {
+      finalAmount = value * 1.05;
+    }
+    setAmount(finalAmount);
     if ([50, 100, 150].includes(value)) {
       setSelectedAmount(value);
     } else {
@@ -77,14 +81,19 @@ const PaymentForm = () => {
   };
 
   const processPayment = useCallback(async () => {
-    if (amount <= 0) {
+    let finalAmount = amount;
+    if (isCheckedFee) {
+      finalAmount = amount * 1.05; // Adding 5% to the amount
+    }
+   
+    if (finalAmount <= 0) {
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000); // Auto-hide after 3 seconds
       return;
     }
 
     const orderData = {
-      amount: parseInt(amount),
+      amount: parseInt(finalAmount),
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
       notes: { workerName, workerIds, userId , isCheckedFee  }
@@ -120,7 +129,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ workerIds, amount , isCheckedFee })
+                body: JSON.stringify({ workerIds, finalAmount })
               });
             } else {
               await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
@@ -128,7 +137,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ amount , isCheckedFee })
+                body: JSON.stringify({ finalAmount })
               });
             }
             // Redirect to ratings page
