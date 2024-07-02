@@ -68,11 +68,7 @@ const PaymentForm = () => {
   };
 
   const handleAmountChange = (value) => {
-    let finalAmount = value;
-    if (isCheckedFee) {
-      finalAmount = value * 1.05;
-    }
-    setAmount(finalAmount);
+    setAmount(value);
     if ([50, 100, 150].includes(value)) {
       setSelectedAmount(value);
     } else {
@@ -85,6 +81,8 @@ const PaymentForm = () => {
     if (isCheckedFee) {
       finalAmount = amount * 1.05; // Adding 5% to the amount
     }
+    
+    finalAmount = (finalAmount.toFixed(2));
    
     if (finalAmount <= 0) {
       setShowNotification(true);
@@ -93,7 +91,7 @@ const PaymentForm = () => {
     }
 
     const orderData = {
-      amount: parseInt(finalAmount),
+      amount: finalAmount,
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
       notes: { workerName, workerIds, userId , isCheckedFee  }
@@ -110,7 +108,7 @@ const PaymentForm = () => {
       const data = await response.json();
       const orderId = data.orderId;
       const options = {
-        amount: amount * 100,
+        amount: finalAmount * 100,
         currency: 'INR',
         name: 'Tipzonn',
         description: 'Tip Payment',
