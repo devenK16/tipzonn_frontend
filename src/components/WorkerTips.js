@@ -3,21 +3,20 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Meteors } from './ui/meteors';
 import './WorkerTips.css';
+import { requestFirebaseNotificationPermission, onMessageListener } from '../firebase';
 
 function WorkerTips() {
   const { workerId } = useParams();
   const [worker, setWorker] = useState(null);
   const [tips, setTips] = useState([]);
   const [totalTip, setTotalTip] = useState(0);
+  const [notification, setNotification] = useState({ title: '', body: '' });
 
   useEffect(() => {
     const fetchTips = async () => {
       try {
         const workerResponse = await axios.get(`https://backend.tipzonn.com/api/workers/worker/${workerId}`);
         const tipsResponse = await axios.get(`https://backend.tipzonn.com/api/tips/${workerId}`);
-
-        console.log('Worker Response:', workerResponse.data);
-        console.log('Tips Response:', tipsResponse.data);
 
         setWorker(workerResponse.data);
 
@@ -34,12 +33,34 @@ function WorkerTips() {
     fetchTips();
   }, [workerId]);
 
+  useEffect(() => {
+    requestFirebaseNotificationPermission().then((token) => {
+      if (token) {
+        axios.post(`https://backend.tipzonn.com/api/workers/worker/${workerId}/token`, { token })
+          .catch(err => console.error('Error saving FCM token:', err));
+      }
+    });
+
+    onMessageListener()
+      .then(payload => {
+        setNotification({ title: payload.notification.title, body: payload.notification.body });
+        console.log('Notification received:', payload);
+      })
+      .catch(err => console.log('failed: ', err));
+  }, [workerId]);
+
   if (!worker) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="worker-tips-container">
+      {notification.title && (
+        <div className="notification-popup">
+          <h2>{notification.title}</h2>
+          <p>{notification.body}</p>
+        </div>
+      )}
       <div className="header">
         <div className="welcome-message">
           <h1>Welcome,</h1>
