@@ -83,15 +83,16 @@ const PaymentForm = () => {
     }
     
     finalAmount = (finalAmount.toFixed(2));
+    const finalAmountNumber = parseFloat(finalAmount);
    
-    if (finalAmount <= 0) {
+    if (finalAmountNumber <= 0) {
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000); // Auto-hide after 3 seconds
       return;
     }
 
     const orderData = {
-      amount: finalAmount,
+      amount: finalAmountNumber,
       currency: 'INR',
       receipt: `receipt_${new Date().getTime()}`,
       notes: { workerName, workerIds, userId , isCheckedFee  }
@@ -108,7 +109,7 @@ const PaymentForm = () => {
       const data = await response.json();
       const orderId = data.orderId;
       const options = {
-        amount: finalAmount * 100,
+        amount: finalAmountNumber * 100,
         currency: 'INR',
         name: 'Tipzonn',
         description: 'Tip Payment',
@@ -127,7 +128,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ workerIds, finalAmount })
+                body: JSON.stringify({ workerIds, amount: finalAmountNumber })
               });
             } else {
               await fetch(`https://backend.tipzonn.com/api/tips/${workerId}`, {
@@ -135,7 +136,7 @@ const PaymentForm = () => {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ finalAmount })
+                body: JSON.stringify({ amount: finalAmountNumber })
               });
             }
             // Redirect to ratings page
