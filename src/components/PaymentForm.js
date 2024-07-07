@@ -5,6 +5,18 @@ import { Drawer } from 'vaul';
 import CurrencyInput from '../components/ui/CurrencyInput';
 import './payment.css';
 
+const avatarImages = [
+  '/avt1.png',
+  '/avt2.png',
+  '/avt3.png',
+  '/avt4.png',
+];
+
+const getRandomAvatar = () => {
+  const randomIndex = Math.floor(Math.random() * avatarImages.length);
+  return avatarImages[randomIndex];
+};
+
 // Ensure the Razorpay script is loaded
 const loadRazorpayScript = (src) => {
   return new Promise((resolve) => {
@@ -36,7 +48,7 @@ const PaymentForm = () => {
   const [isCheckedFee, setIsCheckedFee] = useState(false);
 
   useEffect(() => {
-    setWorkerPhoto(workerPhotoParam);
+    setWorkerPhoto(workerPhotoParam || getRandomAvatar());
   }, [workerPhotoParam]);
 
   const percentages = [
