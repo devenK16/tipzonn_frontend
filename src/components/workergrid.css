@@ -38,12 +38,14 @@
 
 .worker-card {
   flex: 1 1 110px; /* Allow the card to grow and shrink, with an initial width of 110px */
+  max-width: 110px; /* Ensure it doesn't exceed this width */
   cursor: pointer;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  margin: auto;
 }
 
 .worker-card:hover {
@@ -85,6 +87,8 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 110px; /* Ensure the tip-all card behaves the same as worker cards */
+  max-width: 110px; /* Ensure it doesn't exceed this width */
+  height: 130px;
 }
 
 .tip-all {

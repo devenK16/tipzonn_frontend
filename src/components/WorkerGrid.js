@@ -6,6 +6,17 @@ const WorkerGrid = ({ tzId }) => {
   const [workers, setWorkers] = useState([]);
   const [restaurantName, setRestaurantName] = useState('');
   const navigate = useNavigate();
+  const avatarImages = [
+    '/avt1.png',
+    '/avt2.png',
+    '/avt3.png',
+    '/avt4.png',
+  ];
+
+  const getRandomAvatar = () => {
+    const randomIndex = Math.floor(Math.random() * avatarImages.length);
+    return avatarImages[randomIndex];
+  };
 
   useEffect(() => {
     const fetchWorkers = async () => {
@@ -58,7 +69,7 @@ const WorkerGrid = ({ tzId }) => {
         {workers.map((worker) => (
           <div key={worker._id} className="worker-card" onClick={() => showPaymentForm(worker.name, worker._id , worker.photo)}>
             <div className="worker-image-wrapper">
-              <img src={worker.photo} alt={worker.name} className="worker-image" />
+              <img src={worker.photo || getRandomAvatar() } alt={worker.name} className="worker-image" />
               <div className="worker-name-overlay">
                 <div className="worker-name">{worker.name}</div>
               </div>
