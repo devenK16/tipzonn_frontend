@@ -129,7 +129,7 @@ const Rating = () => {
 
   useEffect(() => {
     if (placeId) {
-      window.location.href = `https://search.google.com/local/reviews?placeid=${placeId}`;
+      window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
     }
   }, [placeId]);
 
